@@ -1,0 +1,132 @@
+#typingText {
+    width: 100%;
+    height: 100px;
+    margin-top: 25px;
+    text-align: center;
+    line-height: 200%;
+}
+
+#keyboardContainer img{
+    width: 95%;
+    
+}
+
+#typingText span.current {
+    background-color: #EEE8EA;
+    color: #21CECE;
+}
+
+#typingText span.incorrect {
+    color: red !important;
+}
+
+#typingText span.correct {
+    color: #D5D9DC;
+}
+
+#typingText span.pending {
+	color: black;
+}
+
+#typingText span.newline {
+	color: white;
+}
+
+#typingText span.sizea {
+	font-size: 175%;
+}
+
+#typingText span.sizeb {
+	font-size: 105%;
+}
+
+#typingText span{
+    color: #D5D9DC;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.span8 {
+    width: 810px !important;
+    margin-left: 10px !important;
+}
+
+.span2 {
+    margin-left: 10px;
+    margin-top: 50px;
+}
+
+#lesson {
+	margin-top: 15px;
+}
+
+#li_categories ul.dropdown-menu {
+	width: 130px;
+	min-width: 130px;
+}
+
+#li_categories ul.dropdown-menu a{
+    width: 70px;
+    margin-left: 10px;
+}
+
+#li_categories .dropdown-menu li a.selected {
+	color: #08C;
+}
+
+#li_categories .dropdown-menu li a.selected:hover{
+    color: #fff;
+}
+
+.colapsedKeyBoard {
+	width: 825px !important;
+	margin-left:auto;
+    margin-right:auto;
+}
+
+.ac_loading {
+    background: white url('../images/loading.gif') center center no-repeat;
+}
+
+#content {
+	min-height: 100%;
+}
+
+#top_row {
+	text-align: center;
+}
+
+.top_row_label {
+	font-weight: bold;
+}
+
+#top_timer {
+	margin-top: 10px;
+}
+
+#top_wpm {
+	margin-top: 10px;
+}
+
+#top_accuracy {
+	margin-top: 10px;
+}
+
+#top_label {
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 15px;
+	vertical-align: center;
+}
+
+.modal-backdrop {
+	background: none;
+}
+
+.modal {
+	text-align: center;
+}
+

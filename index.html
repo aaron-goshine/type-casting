@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="title" content="Learn and practice touch typing" />
+    <meta property="og:title" content="/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/images/logo.png" />
+    <meta property="og:site_name" content="/" />
+    <title>Learn and practice touch typing</title>
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
+    <link rel="image_src" href="/images/logo.png" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/../bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/../bootstrap/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/typeSuccess.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/keyBoard.css" />
+    <script type="text/javascript" src="/js/../jquery/jquery.js"></script>
+    <script type="text/javascript" src="/js/../bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/typeSuccess.js"></script>
+    <script type="text/javascript" src="/js/keyBoard.js"></script>
+
+    <meta name="description" content="Learn and practice touch typing. Easy and hassle-free."/>
+    <meta name="keywords" content="typing, typing tutor, touch typing, typing lessons, typing practice"/>
+
+    <style>
+      body {
+        height: 100%;
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        overflow: auto;
+      }
+    </style>
+
+    <script src='/google_analytics_auto.js'></script></head>
+  <body>
+    <div class="wrapper">
+
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">Data type</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav" id="nav_list">
+                <div class="btn-group">
+                  <button class="btn category" id="category_1" data-toggle="button">Learn</button>
+                  <button class="btn category" id="category_2" data-toggle="button">Practice</button>
+                  <button class="btn category" id="category_3" data-toggle="button">Code</button>
+                </div>
+              </ul>
+            </div><!--/.nav-collapse -->
+
+            <div class="nav pull-right">
+              <button class="btn" id="btnOptions">Options</button>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /navbar -->
+      <div class="container" id="content">
+        <div class="row" id="top_row">
+          <div class="span4" id="top_left">
+          </div>
+          <div class="span4" id="top_center">
+            <span class="label label-info" id="top_label"></span>
+          </div> <!-- /top_center -->
+          <div class="span1"></div>
+          <div class="span1" id="top_timer">
+            <div class="top_row_label" id="timer_label">Time</div>
+            <div id="timer">00:00</div>
+          </div> <!-- /top_timer -->
+          <div class="span1" id="top_wpm">
+            <div class="top_row_label" id="wpm_label">WPM</div>
+            <div id="wpm">-</div>
+          </div> <!-- /top_timer -->
+          <div class="span1" id="top_accuracy">
+            <div class="top_row_label" id="accuracy_label">Accuracy</div>
+            <div id="accuracy">-</div>
+          </div> <!-- /top_timer -->
+        </div> <!-- /top_row -->
+        <div class="row">
+          <div class="span2"></div>
+          <div class="span8">
+            <div id="typingText">
+            </div>
+          </div>
+        </div>
+        <div class="row" id='keyboardContainerRow'>
+          <div class="span2" id="left_hand_container">
+            <canvas id="leftCanvas"></canvas>
+          </div>
+          <div class="span8">
+            <div id="keyboardContainer">
+              <div id="keyboard">
+                <ul class="cf" id="numbers">
+                  <li><a class="key c192 c96"><b>~</b><span>`</span></a></li>
+                  <li><a class="key c49 c33"><b>!</b><span>1</span></a></li>
+                  <li><a class="key c50 c64"><b>@</b><span>2</span></a></li>
+                  <li><a class="key c51 c35"><b>#</b><span>3</span></a></li>
+                  <li><a class="key c52 c36"><b>$</b><span>4</span></a></li>
+                  <li><a class="key c53 c37"><b>%</b><span>5</span></a></li>
+                  <li><a class="key c54 c94"><b>^</b><span>6</span></a></li>
+                  <li><a class="key c55 c38"><b>&amp;</b><span>7</span></a></li>
+                  <li><a class="key c56 c42"><b>*</b><span>8</span></a></li>
+                  <li><a class="key c57 c40"><b>(</b><span>9</span></a></li>
+                  <li><a class="key c48 c41"><b>)</b><span>0</span></a></li>
+                  <li><a class="key c95 alt c45 c189"><b>_</b><span>-</span></a></li>
+                  <li><a class="key c61 c43 c187"><b>+</b><span>=</span></a></li>
+                  <li><a class="key c8" id="backspace"><b>backspace</b><span></span></a></li>
+                </ul>
+                <ul class="cf" id="qwerty">
+                  <li><a class="key c9" id="tab"><span>tab</span></a></li>
+                  <li><a class="key c81 c113"><span>q</span></a></li>
+                  <li><a class="key c87 c119"><span>w</span></a></li>
+                  <li><a class="key c69 c101"><span>e</span></a></li>
+                  <li><a class="key c82 c114"><span>r</span></a></li>
+                  <li><a class="key c84 c116"><span>t</span></a></li>
+                  <li><a class="key c89 c121"><span>y</span></a></li>
+                  <li><a class="key c85 c117"><span>u</span></a></li>
+                  <li><a class="key c73 c105"><span>i</span></a></li>
+                  <li><a class="key c79 c111"><span>o</span></a></li>
+                  <li><a class="key c80 c112"><span>p</span></a></li>
+                  <li><a class="key c123 alt c91 c219"><b>{</b><span>[</span></a></li>
+                  <li><a class="key c93 alt c125 c221"><b>}</b><span>]</span></a></li>
+                  <li><a class="key c92 alt c124 c220"><b>|</b><span>\</span></a></li>
+                </ul>
+                <ul class="cf" id="asdfg">
+                  <li><a class="key alt c20" id="caps"><b></b><span>caps lock</span></a></li>
+                  <li><a class="key c65 c97"><span>a</span></a></li>
+                  <li><a class="key c83 c115"><span>s</span></a></li>
+                  <li><a class="key c68 c100"><span>d</span></a></li>
+                  <li><a class="key c70 c102"><span>f</span></a></li>
+                  <li><a class="key c71 c103"><span>g</span></a></li>
+                  <li><a class="key c72 c104"><span>h</span></a></li>
+                  <li><a class="key c74 c106"><span>j</span></a></li>
+                  <li><a class="key c75 c107"><span>k</span></a></li>
+                  <li><a class="key c76 c108"><span>l</span></a></li>
+                  <li><a class="key c58 alt c59 c186"><b>:</b><span>;</span></a></li>
+                  <li><a class="key c39 alt c34 c222"><b>"</b><span>'</span></a></li>
+                  <li><a class="key c13 alt" id="enter"><span>Enter</span></a></li>
+                </ul>
+                <ul class="cf" id="zxcvb">
+                  <li><a class="key shiftleft c16"><span>Shift</span></a></li>
+                  <li><a class="key c90 c122"><span>z</span></a></li>
+                  <li><a class="key c88 c120"><span>x</span></a></li>
+                  <li><a class="key c67 c99"><span>c</span></a></li>
+                  <li><a class="key c86 c118"><span>v</span></a></li>
+                  <li><a class="key c66 c98"><span>b</span></a></li>
+                  <li><a class="key c78 c110"><span>n</span></a></li>
+                  <li><a class="key c77 c109"><span>m</span></a></li>
+                  <li><a class="key c44 alt c60 c188"><b>&lt;</b><span>,</span></a></li>
+                  <li><a class="key c46 alt c62 c190"><b>&gt;</b><span>.</span></a></li>
+                  <li><a class="key c47 alt c63 c191"><b>?</b><span>/</span></a></li>
+                  <li><a class="key c16 shiftright"><span>Shift</span></a></li>
+                </ul>
+                <ul class="cf" id="bottomrow">
+                  <li><a class="key control c17" id="fn"><span>ctrl</span></a></li>
+                  <li><a class="key option" id="optionleft"><span></span></a></li>
+                  <li><a class="key alter c18" id="alterleft"><span>alt</span></a></li>
+                  <li><a class="key c32" id="spacebar"></a></li>
+                  <li><a class="key alter c18" id="alterright"><span>alt</span></a></li>
+                  <li><a class="key option" id="optionright"><span></span></a></li>
+                  <li><a class="key control c17" id="fn"><span>ctrl</span></a></li>
+                  <li style="display:none"><a class="key c0"><b></b><span></span></a></li> <!-- dummy key -->
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="span2" id="right_hand_container">
+            <canvas id="rightCanvas"></canvas>
+          </div>
+        </div>
+      </div><!-- /container -->
+      <div id="modalLessonComplete" class="modal hide fade" tabindex=-1 role="dialog" aria-labelledby="headerLessonComplete" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="headerLessonComplete">Lesson complete!</h3>
+        </div>
+        <div class="modal-body">
+          <div>Congratulations! You have completed the lesson!</div>
+          <h4>Lesson statistics:</h4>
+          <div>Speed: <span id="modalWPM"></span></div>
+          <div>Accuracy: <span id="modalAccuracy"></span></div>
+          <div class="label label-warning" id="modalError">Your accuracy is too low. Consider redoing the lesson</div>
+        </div>
+        <div class="modal-footer">
+          <div id="modalKey" align="center"></div>
+        </div>
+      </div> <!-- modalLessonComplete -->
+
+      <script type="text/javascript">
+        var selectedCategoryId = '1';
+        var currentString = '';
+        var currentStringId = 0;
+        var lessonListAjax_url = '/general/getLessonListAjax';
+      </script>
+
+      <div class="container" id="footer">
+        <a href="#">About</a>
+        <a href="#">Help</a>
+        <a href="#">Contact Us</a>
+      </div>
+
+    </div> <!-- /.wrapper -->
+    <div id="modalOptions" class="modal hide fade" tabindex=-1 role="dialog" aria-labelledby="mdlOptionsHeader" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="mdlOptionsHeader">Options</h3>
+      </div>
+      <div class="modal-body">
+        <form id="option-form" method="post">
+          <div class="opt">
+            <label class="checkbox">
+              <input type="checkbox" id="optKBRow" value="1" />Show keyboard and hands
+            </label>
+          </div>
+          <div class="opt">
+            <label class="checkbox">
+              <strong><em>More options coming soon!</em> </strong>
+            </label>
+          </div>
+        </form>
+      </div> <!-- /.modal-body -->
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+body {
+	font-family: sans-serif;
+}
+
+.header {
+	font-size: 400%;
+	margin-top: 10%;
+	margin-bottom: 50px;
+}
+
+.quote {
+	font-size: 150%;
+	margin-bottom: 30px;
+}
+
+.team-heading {
+	font-size: 150%;
+	margin-top: 40px;
+	margin-bottom: 10px;
+}
+
+.link-list a {
+	text-decoration: none;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+

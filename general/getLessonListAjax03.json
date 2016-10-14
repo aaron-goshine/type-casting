@@ -1,0 +1,512 @@
+[
+  {
+    "id": "41",
+    "lessonString": [
+      {
+        "id": "2001",
+        "text": "template<size_t kChunkBytes>\u00b6void* ArenaImpl<kChunkBytes>::allocSlow(size_t nbytes) {\u00b6\u00acif (unlikely(nbytes >= kChunkBytes)) {\u00b6\u00ac\u00acchar* ptr = static_cast<char*>(malloc(nbytes));\u00b6\u00ac\u00acm_externalPtrs.push(ptr);\u00b6\u00ac\u00acassert((intptr_t(ptr) & (kMinBytes - 1)) == 0);\u00b6\u00ac\u00acreturn ptr;\u00b6\u00ac}\u00b6\u00accreateSlab();\u00b6\u00acreturn alloc(nbytes);\u00b6}"
+      },
+      {
+        "id": "2002",
+        "text": "bool Synchronizable::wait(long seconds, long long nanosecs) {\u00b6\u00acstruct timespec ts;\u00b6\u00acgettime(CLOCK_REALTIME, &ts);\u00b6\u00acts.tv_sec += seconds;\u00b6\u00acts.tv_nsec += nanosecs;\u00b6\u00b6\u00acint ret = pthread_cond_timedwait(&m_cond, &m_mutex.getRaw(), &ts);\u00b6\u00acassert(ret != EPERM);\u00b6\u00b6\u00acreturn ret != ETIMEDOUT;\u00b6}"
+      },
+      {
+        "id": "2003",
+        "text": "void handle_document_event (document::document_ptr document, event_t event)\u00b6{\u00b6\u00acif(event == did_change_open_status && !document->is_open())\u00b6\u00ac\u00acsend_event(kAEClosedFile);\u00b6\u00acelse if(event == did_save)\u00b6\u00ac\u00acsend_event(kAEModifiedFile);\u00b6\u00b6\u00acif(event == did_change_open_status && !document->is_open())\u00b6\u00ac{\u00b6\u00ac\u00acdocument->remove_callback(this);\u00b6\u00ac\u00acdelete this;\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2004",
+        "text": "void vtrace(const char *fmt, va_list ap) {\u00b6\u00acstatic pthread_mutex_t mtx = PTHREAD_MUTEX_INITIALIZER;\u00b6\u00acif (moduleEnabledRelease(Trace::ringbuffer, 1)) {\u00b6\u00ac\u00acvtraceRingbuffer(fmt, ap);\u00b6\u00ac} else {\u00b6\u00ac\u00acONTRACE(1, pthread_mutex_lock(&mtx));\u00b6\u00ac\u00acONTRACE(1, fprintf(out, \"t%#08x: \",\u00b6\u00ac\u00ac\u00acint((int64_t)pthread_self() & 0xFFFFFFFF)));\u00b6\u00ac\u00acvfprintf(out, fmt, ap);\u00b6\u00ac\u00acONTRACE(1, pthread_mutex_unlock(&mtx));\u00b6\u00ac\u00acflush();\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2005",
+        "text": "void ChildProcessContext::_readyReadStandardError()\u00b6{\u00b6\u00acQByteArray bytes = m_proc.readAllStandardError();\u00b6\u00acemit stderrData(m_encoding.decode(bytes));\u00b6}"
+      },
+      {
+        "id": "2006",
+        "text": "QVariant Callback::call(const QVariantList& arguments)\u00b6{\u00b6\u00acemit called(arguments);\u00b6\u00b6\u00acqDebug() << \"Callback - call result:\" << m_returnValue;\u00b6\u00acreturn m_returnValue;\u00b6}"
+      },
+      {
+        "id": "2007",
+        "text": "std::string Util::GetPrimaryIP() {\u00b6\u00acstruct utsname buf;\u00b6\u00acuname((struct utsname *)&buf);\u00b6\u00b6\u00acHostEnt result;\u00b6\u00acif (!safe_gethostbyname(buf.nodename, result)) {\u00b6\u00ac\u00acreturn buf.nodename;\u00b6\u00ac}\u00b6\u00b6\u00acstruct in_addr in;\u00b6\u00acmemcpy(&in.s_addr, *(result.hostbuf.h_addr_list), sizeof(in.s_addr));\u00b6\u00acreturn safe_inet_ntoa(in);\u00b6}"
+      },
+      {
+        "id": "2008",
+        "text": "const char *StringBag::add(const char *s) {\u00b6\u00acchar *allocated = strdup(s);\u00b6\u00acm_strings.push_back(allocated);\u00b6\u00acreturn allocated;\u00b6}\u00b6\u00b6const char *StringBag::at(unsigned int index) const {\u00b6\u00acassert(index < m_strings.size());\u00b6\u00acreturn m_strings[index];\u00b6}"
+      },
+      {
+        "id": "2009",
+        "text": "class idInternalCVar : public idCVar {\u00b6public:\u00b6\u00acidInternalCVar();\u00b6\u00acidInternalCVar(const idCVar *cvar);\u00b6\u00acvirtual ~idInternalCVar();\u00b6\u00b6\u00acvoid Update(const idCVar *cvar);\u00b6\u00acvoid Set(const char *newValue, bool force);\u00b6\u00acvoid Reset();\u00b6\u00b6private:\u00b6\u00acidStr nameString;\u00b6\u00b6\u00acvirtual void InternalSetString(const char *newValue);\u00b6\u00acvirtual void InternalServerSetString(const char *newValue);\u00b6};"
+      },
+      {
+        "id": "2010",
+        "text": "void idCompressor_BitStream::WriteBits(int value, int numBits) {\u00b6\u00acint put, fraction;\u00b6\u00b6\u00acif (writeBit == 0 && numBits == 8 && writeByte < writeLength) {\u00b6\u00ac\u00acwriteByte++;\u00b6\u00ac\u00acwriteTotalBytes++;\u00b6\u00ac\u00acwriteData[writeByte - 1] = value;\u00b6\u00ac\u00acreturn;\u00b6\u00ac}\u00b6\u00b6\u00acwriteData[writeByte - 1] |= fraction << writeBit;\u00b6\u00acnumBits -= put;\u00b6}"
+      },
+      {
+        "id": "2011",
+        "text": "bool ignore_arg = !package->self_extract();\u00b6for (unsigned i = 1; i < argv.size(); ++i) {\u00b6\u00acif (ignore_arg && argv[i] == args[0]) {\u00b6\u00ac\u00acignore_arg = false;\u00b6\u00ac\u00accontinue;\u00b6\u00ac}\u00b6\u00b6\u00acresult->AppendString(argv[i]);\u00b6}"
+      },
+      {
+        "id": "2012",
+        "text": "void App::Call(const std::string& method,\u00b6\u00ac\u00ac\u00ac\u00ac\u00acconst base::ListValue& arguments) {\u00b6\u00acif (method == \"Quit\") {\u00b6\u00ac\u00acQuit(GetRenderProcessHost());\u00b6\u00ac\u00acreturn;\u00b6\u00ac} else if (method == \"CloseAllWindows\") {\u00b6\u00ac\u00acCloseAllWindows();\u00b6\u00ac\u00acreturn;\u00b6\u00ac}\u00b6\u00b6\u00acNOTREACHED() << \"Calling unknown method \" << method << \" of App\";\u00b6}"
+      },
+      {
+        "id": "2013",
+        "text": "void Tray::OnClick(GtkWidget* widget) {\u00b6\u00acbase::ListValue args;\u00b6\u00acdispatcher_host()->SendEvent(this, \"click\", args);\u00b6}\u00b6\u00b6void Tray::OnPopupMenu(GtkWidget* widget, guint button, guint time) {\u00b6\u00acif (menu_) {\u00b6\u00ac\u00acgtk_menu_popup(GTK_MENU(menu_->menu_), NULL, NULL,\u00b6\u00ac\u00ac\u00ac\u00ac\u00ac\u00ac\u00acgtk_status_icon_position_menu,\u00b6\u00ac\u00ac\u00ac\u00ac\u00ac\u00ac\u00acstatus_item_, button, time);\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2014",
+        "text": "for (std::map<std::string, content::DxDiagNode>::const_iterator it =\u00b6\u00ac\u00acnode.children.begin();\u00b6\u00ac\u00acit != node.children.end();\u00b6\u00ac\u00ac++it) {\u00b6\u00acListValue* sublist = DxDiagNodeToList(it->second);\u00b6\u00aclist->Append(NewDescriptionValuePair(it->first, sublist));\u00b6}"
+      },
+      {
+        "id": "2015",
+        "text": "std::string GPUDeviceToString(const content::GPUInfo::GPUDevice& gpu) {\u00b6\u00acstd::string vendor = base::StringPrintf(\"0x%04x\", gpu.vendor_id);\u00b6\u00acif (!gpu.vendor_string.empty())\u00b6\u00ac\u00acvendor += \" [\" + gpu.vendor_string + \"]\";\u00b6\u00acstd::string device = base::StringPrintf(\"0x%04x\", gpu.device_id);\u00b6\u00acif (!gpu.device_string.empty())\u00b6\u00ac\u00acdevice += \" [\" + gpu.device_string + \"]\";\u00b6\u00acreturn base::StringPrintf(\u00b6\u00ac\u00ac\u00ac\"VENDOR = %s, DEVICE= %s\", vendor.c_str(), device.c_str());\u00b6}"
+      },
+      {
+        "id": "2016",
+        "text": "class ShellAccessTokenStore : public content::AccessTokenStore {\u00b6\u00acpublic:\u00b6\u00ac\u00acexplicit ShellAccessTokenStore(net::URLRequestContextGetter* request_context);\u00b6\u00b6\u00acprivate:\u00b6\u00ac\u00acvirtual ~ShellAccessTokenStore();\u00b6\u00b6\u00ac\u00acstatic void DidLoadAccessTokens(\u00b6\u00ac\u00ac\u00ac\u00acnet::URLRequestContextGetter* request_context,\u00b6\u00ac\u00ac\u00ac\u00acconst LoadAccessTokensCallbackType& callback);\u00b6\u00b6\u00ac\u00acnet::URLRequestContextGetter* request_context_;\u00b6\u00b6\u00ac\u00acDISALLOW_COPY_AND_ASSIGN(ShellAccessTokenStore);\u00b6};"
+      },
+      {
+        "id": "2017",
+        "text": "if (center <= split)\u00b6{\u00b6\u00aci++;\u00b6\u00acif (clipL < maxb)\u00b6\u00ac\u00acclipL = maxb;\u00b6}\u00b6else\u00b6{\u00b6\u00acint t = dat.indices[i];\u00b6\u00acdat.indices[i] = dat.indices[right];\u00b6\u00acdat.indices[right] = t;\u00b6\u00acright--;\u00b6\u00acif (clipR > minb)\u00b6\u00ac\u00acclipR = minb;\u00b6}"
+      },
+      {
+        "id": "2018",
+        "text": "bool DynamicMapTree::getIntersectionTime(const uint32 phasemask, const G3D::Ray& ray,\u00b6\u00ac\u00ac\u00ac\u00ac\u00acconst G3D::Vector3& endPos, float& maxDist) const\u00b6{\u00b6\u00acfloat distance = maxDist;\u00b6\u00acDynamicTreeIntersectionCallback callback(phasemask);\u00b6\u00acimpl->intersectRay(ray, callback, distance, endPos);\u00b6\u00acif (callback.didHit())\u00b6\u00ac\u00acmaxDist = distance;\u00b6\u00acreturn callback.didHit();\u00b6}"
+      },
+      {
+        "id": "2019",
+        "text": "std::string StaticMapTree::getTileFileName(uint32 mapID, uint32 tileX, uint32 tileY)\u00b6{\u00b6\u00acstd::stringstream tilefilename;\u00b6\u00actilefilename.fill('0');\u00b6\u00actilefilename << std::setw(3) << mapID << '_';\u00b6\u00actilefilename << std::setw(2) << tileY << '_' << std::setw(2) << tileX << \".vmtile\";\u00b6\u00acreturn tilefilename.str();\u00b6}"
+      },
+      {
+        "id": "2020",
+        "text": "class LocationInfoCallback\u00b6{\u00b6\u00acpublic:\u00b6\u00ac\u00acLocationInfoCallback(ModelInstance* val, LocationInfo &info): prims(val), locInfo(info), result(false) {}\u00b6\u00ac\u00acvoid operator()(const Vector3& point, uint32 entry)\u00b6\u00ac\u00ac{\u00b6#ifdef VMAP_DEBUG\u00b6\u00ac\u00ac\u00acsLog->outDebug(LOG_FILTER_MAPS, \"LocationInfoCallback: trying to intersect '%s'\", prims[entry].name.c_str());\u00b6#endif\u00b6\u00ac\u00ac\u00acif (prims[entry].GetLocationInfo(point, locInfo))\u00b6\u00ac\u00ac\u00ac\u00acresult = true;\u00b6\u00ac\u00ac}\u00b6\u00b6\u00ac\u00acModelInstance* prims;\u00b6\u00ac\u00acLocationInfo &locInfo;\u00b6\u00ac\u00acbool result;\u00b6};"
+      },
+      {
+        "id": "2021",
+        "text": "bool AccountMgr::normalizeString(std::string& utf8str)\u00b6{\u00b6\u00acwchar_t wstr_buf[MAX_ACCOUNT_STR + 1];\u00b6\u00b6\u00acsize_t wstr_len = MAX_ACCOUNT_STR;\u00b6\u00acif (!Utf8toWStr(utf8str, wstr_buf, wstr_len))\u00b6\u00ac\u00acreturn false;\u00b6\u00b6\u00acstd::transform(&wstr_buf[0], wstr_buf + wstr_len, &wstr_buf[0], wcharToUpperOnlyLatin);\u00b6\u00b6\u00acreturn WStrToUtf8(wstr_buf, wstr_len, utf8str);\u00b6}"
+      },
+      {
+        "id": "2022",
+        "text": "Player* bad = sObjectMgr.GetPlayer(badname);\u00b6if (bad == NULL || !IsBanned(bad->GetObjectGuid()))\u00b6{\u00b6\u00acWorldPacket data;\u00b6\u00acMakePlayerNotFound(&data, badname);\u00b6\u00acSendToOne(&data, good);\u00b6}\u00b6else\u00b6{\u00b6\u00acm_banned.erase(bad->GetObjectGuid());\u00b6\u00b6\u00acWorldPacket data;\u00b6\u00acMakePlayerUnbanned(&data, bad->GetObjectGuid(), good);\u00b6\u00acSendToAll(&data);\u00b6}"
+      },
+      {
+        "id": "2023",
+        "text": "bool Group::AddInvite(Player* player)\u00b6{\u00b6\u00acif (!player || player->GetGroupInvite())\u00b6\u00ac\u00acreturn false;\u00b6\u00acGroup* group = player->GetGroup();\u00b6\u00acif (group && group->isBGGroup())\u00b6\u00ac\u00acgroup = player->GetOriginalGroup();\u00b6\u00acif (group)\u00b6\u00ac\u00acreturn false;\u00b6\u00b6\u00acplayer->SetGroupInvite(this);\u00b6\u00b6\u00acreturn true;\u00b6}"
+      },
+      {
+        "id": "2024",
+        "text": "namespace MaNGOS\u00b6{\u00b6\u00acextern \"C\" void external_wrapper(void* p)\u00b6\u00ac{\u00b6\u00ac\u00acstd::atexit((void (*)())p);\u00b6\u00ac}\u00b6\u00b6\u00acvoid MANGOS_DLL_SPEC at_exit(void (*func)())\u00b6\u00ac{\u00b6\u00ac\u00acexternal_wrapper((void*)func);\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2025",
+        "text": "while (((i = m_events.begin()) != m_events.end()) && i->first <= m_time)\u00b6{\u00b6\u00acBasicEvent* Event = i->second;\u00b6\u00acm_events.erase(i);\u00b6\u00b6\u00acif (Event->Execute(m_time, p_time))\u00b6\u00ac{\u00b6\u00ac\u00acdelete Event;\u00b6\u00ac}\u00b6\u00acelse\u00b6\u00ac{\u00b6\u00ac\u00acEvent->Abort(m_time);\u00b6\u00ac\u00acdelete Event;\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2026",
+        "text": "#ifndef _UTIL_H\u00b6#define _UTIL_H\u00b6\u00b6#include \"Common.h\"\u00b6\u00b6#include <string>\u00b6#include <vector>\u00b6\u00b6typedef std::vector<std::string> Tokens;\u00b6\u00b6Tokens StrSplit(const std::string& src, const std::string& sep);\u00b6void stripLineInvisibleChars(std::string& src);\u00b6std::string TimeToTimestampStr(time_t t);\u00b6\u00b6#endif"
+      },
+      {
+        "id": "2027",
+        "text": "std::string Action::str( void )\u00b6{\u00b6\u00acchar thechar[ 10 ] = { 0 };\u00b6\u00acif ( char_present ) {\u00b6\u00ac\u00acif ( iswprint( ch ) )\u00b6\u00ac\u00ac\u00acsnprintf( thechar, 10, \"(%lc)\", ch );\u00b6\u00ac\u00acelse\u00b6\u00ac\u00ac\u00acsnprintf( thechar, 10, \"(0x%x)\", (unsigned int)ch );\u00b6\u00ac}\u00b6\u00b6\u00acreturn name() + std::string( thechar );\u00b6}"
+      },
+      {
+        "id": "2028",
+        "text": "bool CAlert::RelayTo(CNode* pnode) const\u00b6{\u00b6\u00acif (!IsInEffect())\u00b6\u00ac\u00acreturn false;\u00b6\u00acif (pnode->setKnown.insert(GetHash()).second)\u00b6\u00ac{\u00b6\u00ac\u00acif (AppliesTo(pnode->nVersion, pnode->strSubVer) ||\u00b6\u00ac\u00ac\u00acAppliesToMe() ||\u00b6\u00ac\u00ac\u00acGetAdjustedTime() < nRelayUntil)\u00b6\u00ac\u00ac{\u00b6\u00ac\u00ac\u00acpnode->PushMessage(\"alert\", *this);\u00b6\u00ac\u00ac\u00acreturn true;\u00b6\u00ac\u00ac}\u00b6\u00ac}\u00b6\u00acreturn false;\u00b6}"
+      },
+      {
+        "id": "2029",
+        "text": "bool DecodeAddress(string str, CService& addr)\u00b6{\u00b6\u00acvector<unsigned char> vch;\u00b6\u00acif (!DecodeBase58Check(str.substr(1), vch))\u00b6\u00ac\u00acreturn false;\u00b6\u00b6\u00acstruct ircaddr tmp;\u00b6\u00acif (vch.size() != sizeof(tmp))\u00b6\u00ac\u00acreturn false;\u00b6\u00acmemcpy(&tmp, &vch[0], sizeof(tmp));\u00b6\u00b6\u00acaddr = CService(tmp.ip, ntohs(tmp.port));\u00b6\u00acreturn true;\u00b6}"
+      }
+    ],
+    "name": "Code: C++"
+  },
+  {
+    "id": "42",
+    "lessonString": [
+      {
+        "id": "2501",
+        "text": "@Override\u00b6public void inboundBufferUpdated(ChannelHandlerContext ctx)\u00b6\u00ac\u00acthrows Exception {\u00b6\u00acByteBuf buf = ctx.inboundByteBuffer();\u00b6\u00acif (logger.isEnabled(internalLevel)) {\u00b6\u00ac\u00aclogger.log(internalLevel, format(ctx, formatBuffer(\"RECEIVED\", buf)));\u00b6\u00ac}\u00b6\u00acctx.nextInboundByteBuffer().writeBytes(buf);\u00b6\u00acctx.fireInboundBufferUpdated();\u00b6}"
+      },
+      {
+        "id": "2502",
+        "text": "public class ChunkedFile implements ChunkedByteInput {\u00b6\u00b6\u00acprivate final RandomAccessFile file;\u00b6\u00acprivate final long endOffset;\u00b6\u00acprivate long offset;\u00b6\u00b6\u00acpublic ChunkedFile(File file) throws IOException {\u00b6\u00ac\u00acthis(file, ChunkedStream.DEFAULT_CHUNK_SIZE);\u00b6\u00ac}\u00b6\u00b6\u00ac@Override\u00b6\u00acpublic boolean isEndOfInput() throws Exception {\u00b6\u00ac\u00acreturn !(offset < endOffset && file.getChannel().isOpen());\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2503",
+        "text": "public boolean executeKeyEvent(KeyEvent event) {\u00b6\u00acboolean handled = false;\u00b6\u00acif (event.getAction() == KeyEvent.ACTION_DOWN) {\u00b6\u00ac\u00acswitch (event.getKeyCode()) {\u00b6\u00ac\u00accase KeyEvent.KEYCODE_DPAD_LEFT:\u00b6\u00ac\u00ac\u00achandled = arrowScroll(FOCUS_LEFT);\u00b6\u00ac\u00ac\u00acbreak;\u00b6\u00ac\u00accase KeyEvent.KEYCODE_DPAD_RIGHT:\u00b6\u00ac\u00ac\u00achandled = arrowScroll(FOCUS_RIGHT);\u00b6\u00ac\u00ac\u00acbreak;\u00b6\u00ac\u00ac}\u00b6\u00ac}\u00b6\u00acreturn handled;\u00b6}"
+      },
+      {
+        "id": "2504",
+        "text": "@SuppressWarnings(\"deprecation\")\u00b6public void setBehindWidth(int i) {\u00b6\u00acint width;\u00b6\u00acDisplay display = ((WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE))\u00b6\u00ac\u00ac\u00ac.getDefaultDisplay();\u00b6\u00actry {\u00b6\u00ac\u00acClass<?> cls = Display.class;\u00b6\u00ac\u00acClass<?>[] parameterTypes = {Point.class};\u00b6\u00ac\u00acPoint parameter = new Point();\u00b6\u00ac\u00acMethod method = cls.getMethod(\"getSize\", parameterTypes);\u00b6\u00ac\u00acwidth = parameter.x;\u00b6\u00ac} catch (Exception e) {\u00b6\u00ac\u00acwidth = display.getWidth();\u00b6\u00ac}\u00b6\u00acsetBehindOffset(width-i);\u00b6}"
+      },
+      {
+        "id": "2505",
+        "text": "GetTokenClient(Context context, String applicationId) {\u00b6\u00acContext applicationContext = context.getApplicationContext();\u00b6\u00b6\u00acthis.context = (applicationContext != null) ? applicationContext : context;\u00b6\u00acthis.applicationId = applicationId;\u00b6\u00b6\u00achandler = new Handler() {\u00b6\u00ac\u00ac@Override\u00b6\u00ac\u00acpublic void handleMessage(Message message) {\u00b6\u00ac\u00ac\u00acGetTokenClient.this.handleMessage(message);\u00b6\u00ac\u00ac}\u00b6\u00ac};\u00b6}"
+      },
+      {
+        "id": "2506",
+        "text": "public class Session implements Serializable {\u00b6\u00acprivate static final long serialVersionUID = 1L;\u00b6\u00acpublic static final int DEFAULT_AUTHORIZE_ACTIVITY_CODE = 0xface;\u00b6\u00b6\u00ac@SuppressWarnings(\"serial\")\u00b6\u00acprivate static final Set<String> OTHER_PUBLISH_PERMISSIONS = new HashSet<String>() {{\u00b6\u00ac\u00acadd(\"ads_management\");\u00b6\u00ac\u00acadd(\"create_event\");\u00b6\u00ac\u00acadd(\"rsvp_event\");\u00b6\u00ac}};\u00b6}"
+      },
+      {
+        "id": "2507",
+        "text": "public static final void saveSession(Session session, Bundle bundle) {\u00b6\u00acif (bundle != null && session != null && !bundle.containsKey(SESSION_BUNDLE_SAVE_KEY)) {\u00b6\u00ac\u00acByteArrayOutputStream outputStream = new ByteArrayOutputStream();\u00b6\u00ac\u00actry {\u00b6\u00ac\u00ac\u00acnew ObjectOutputStream(outputStream).writeObject(session);\u00b6\u00ac\u00ac} catch (IOException e) {\u00b6\u00ac\u00ac\u00acthrow new FacebookException(\"Unable to save session.\", e);\u00b6\u00ac\u00ac}\u00b6\u00ac\u00acbundle.putByteArray(SESSION_BUNDLE_SAVE_KEY, outputStream.toByteArray());\u00b6\u00ac\u00acbundle.putBundle(AUTH_BUNDLE_SAVE_KEY, session.authorizationBundle);\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2508",
+        "text": "void setContext(final Activity activity) {\u00b6\u00acthis.context = activity;\u00b6\u00b6\u00acstartActivityDelegate = new StartActivityDelegate() {\u00b6\u00ac\u00ac@Override\u00b6\u00ac\u00acpublic void startActivityForResult(Intent intent, int requestCode) {\u00b6\u00ac\u00ac\u00acactivity.startActivityForResult(intent, requestCode);\u00b6\u00ac\u00ac}\u00b6\u00b6\u00ac\u00ac@Override\u00b6\u00ac\u00acpublic Activity getActivityContext() {\u00b6\u00ac\u00ac\u00acreturn activity;\u00b6\u00ac\u00ac}\u00b6\u00ac};\u00b6}"
+      },
+      {
+        "id": "2509",
+        "text": "public void onCompleted(Response response) {\u00b6\u00actry {\u00b6\u00ac\u00acGraphUser user = response.getGraphObjectAs(GraphUser.class);\u00b6\u00ac\u00acif (user != null) {\u00b6\u00ac\u00ac\u00acfbids.add(user.getId());\u00b6\u00ac\u00ac}\u00b6\u00ac} catch (Exception ex) {\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2510",
+        "text": "@Override\u00b6boolean onActivityResult(int requestCode, int resultCode, Intent data) {\u00b6\u00acResult outcome = null;\u00b6\u00b6\u00acif (resultCode == Activity.RESULT_CANCELED) {\u00b6\u00ac\u00acoutcome = Result.createCancelResult(data.getStringExtra(\"error\"));\u00b6\u00ac} else if (resultCode != Activity.RESULT_OK) {\u00b6\u00ac\u00acoutcome = Result.createErrorResult(\"Unexpected resultCode from authorization.\", null);\u00b6\u00ac} else {\u00b6\u00ac\u00acoutcome = handleResultOk(data);\u00b6\u00ac}\u00b6\u00b6\u00acreturn true;\u00b6}"
+      },
+      {
+        "id": "2511",
+        "text": "static class Result implements Serializable {\u00b6\u00acenum Code {\u00b6\u00ac\u00acSUCCESS,\u00b6\u00ac\u00acCANCEL,\u00b6\u00ac\u00acERROR\u00b6\u00ac}\u00b6\u00b6\u00acfinal Code code;\u00b6\u00acfinal AccessToken token;\u00b6\u00b6\u00acprivate Result(Code code, AccessToken token, String errorMessage) {\u00b6\u00ac\u00acthis.token = token;\u00b6\u00ac\u00acthis.code = code;\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2512",
+        "text": "public static boolean hasSameId(GraphObject a, GraphObject b) {\u00b6\u00acif (a == null || b == null || !a.asMap().containsKey(\"id\")) {\u00b6\u00ac\u00acreturn false;\u00b6\u00ac}\u00b6\u00acif (a.equals(b)) {\u00b6\u00ac\u00acreturn true;\u00b6\u00ac}\u00b6\u00acObject idA = a.getProperty(\"id\");\u00b6\u00acObject idB = b.getProperty(\"id\");\u00b6\u00acif (idA == null || idB == null || !(idA instanceof String)) {\u00b6\u00ac\u00acreturn false;\u00b6\u00ac}\u00b6\u00acreturn idA.equals(idB);\u00b6}"
+      },
+      {
+        "id": "2513",
+        "text": "public static class LayoutParams extends MarginLayoutParams {\u00b6\u00acprivate static final int[] ATTRS = new int[] {\u00b6\u00ac\u00ac\u00acandroid.R.attr.layout_gravity\u00b6\u00ac};\u00b6\u00b6\u00acpublic LayoutParams(Context c, AttributeSet attrs) {\u00b6\u00ac\u00acsuper(c, attrs);\u00b6\u00b6\u00ac\u00acTypedArray a = c.obtainStyledAttributes(attrs, ATTRS);\u00b6\u00ac\u00acgravity = a.getInt(0, -1);\u00b6\u00ac\u00aca.recycle();\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2514",
+        "text": "public class SherlockListFragment extends ListFragment {\u00b6\u00acprivate SherlockFragmentActivity mActivity;\u00b6\u00b6\u00ac@Override\u00b6\u00acpublic void onAttach(Activity activity) {\u00b6\u00ac\u00acif (!(activity instanceof SherlockFragmentActivity)) {\u00b6\u00ac\u00ac\u00acthrow new IllegalStateException(getClass().getSimpleName());\u00b6\u00ac\u00ac}\u00b6\u00ac\u00acmActivity = (SherlockFragmentActivity)activity;\u00b6\u00b6\u00ac\u00acsuper.onAttach(activity);\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2515",
+        "text": "public File[] indexLocations(Index index) {\u00b6\u00acFile[] indexLocations = new File[nodeFiles.length];\u00b6\u00acfor (int i = 0; i < nodeFiles.length; i++) {\u00b6\u00ac\u00acindexLocations[i] = new File(new File(nodeFiles[i], \"indices\"), index.name());\u00b6\u00ac}\u00b6\u00acreturn indexLocations;\u00b6}\u00b6\u00b6public File[] nodeDataLocations() {\u00b6\u00acif (nodeFiles == null || locks == null) {\u00b6\u00ac\u00acthrow new ElasticSearchIllegalStateException(\"node is not configured to store local location\");\u00b6\u00ac}\u00b6\u00acreturn nodeFiles;\u00b6}"
+      },
+      {
+        "id": "2516",
+        "text": "static class Parser implements IParser{\u00b6\u00acpublic Expr parse(C context, Object frm) {\u00b6\u00ac\u00acISeq form = (ISeq) frm;\u00b6\u00ac\u00acif(RT.length(form) != 3)\u00b6\u00ac\u00ac\u00acthrow new IllegalArgumentException(\"Malformed assignment, expecting (set! target val)\");\u00b6\u00ac\u00acExpr target = analyze(C.EXPRESSION, RT.second(form));\u00b6\u00ac\u00acif(!(target instanceof AssignableExpr))\u00b6\u00ac\u00ac\u00acthrow new IllegalArgumentException(\"Invalid assignment target\");\u00b6\u00ac\u00acreturn new AssignExpr((AssignableExpr) target, analyze(C.EXPRESSION, RT.third(form)));\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2517",
+        "text": "public void emitAssign(C context, ObjExpr objx, GeneratorAdapter gen,\u00b6\u00ac\u00ac\u00ac\u00ac\u00acExpr val){\u00b6\u00acgen.visitLineNumber(line, gen.mark());\u00b6\u00acval.emit(C.EXPRESSION, objx, gen);\u00b6\u00acgen.dup();\u00b6\u00acHostExpr.emitUnboxArg(objx, gen, field.getType());\u00b6\u00acgen.putStatic(Type.getType(c), fieldName, Type.getType(field.getType()));\u00b6\u00acif(context == C.STATEMENT)\u00b6\u00ac\u00acgen.pop();\u00b6}"
+      },
+      {
+        "id": "2518",
+        "text": "static class MonitorEnterExpr extends UntypedExpr{\u00b6\u00acfinal Expr target;\u00b6\u00b6\u00acpublic Object eval() {\u00b6\u00ac\u00acthrow new UnsupportedOperationException(\"Cant eval monitor-enter\");\u00b6\u00ac}\u00b6\u00b6\u00acstatic class Parser implements IParser{\u00b6\u00ac\u00acpublic Expr parse(C context, Object form) {\u00b6\u00ac\u00ac\u00acreturn new MonitorEnterExpr(analyze(C.EXPRESSION, RT.second(form)));\u00b6\u00ac\u00ac}\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "2519",
+        "text": "static public boolean subsumes(Class[] c1, Class[] c2){\u00b6\u00acBoolean better = false;\u00b6\u00acfor(int i = 0; i < c1.length; i++)\u00b6\u00ac\u00ac{\u00b6\u00ac\u00acif(c1[i] != c2[i])\u00b6\u00ac\u00ac\u00ac{\u00b6\u00ac\u00ac\u00acif(!c1[i].isPrimitive() && c2[i].isPrimitive()\u00b6\u00ac\u00ac\u00ac   || c2[i].isAssignableFrom(c1[i]))\u00b6\u00ac\u00ac\u00ac\u00acbetter = true;\u00b6\u00ac\u00ac\u00acelse\u00b6\u00ac\u00ac\u00ac\u00acreturn false;\u00b6\u00ac\u00ac\u00ac}\u00b6\u00ac\u00ac}\u00b6\u00acreturn better;\u00b6}"
+      }
+    ],
+    "name": "Code: Java"
+  },
+  {
+    "id": "43",
+    "lessonString": [
+      {
+        "id": "3001",
+        "text": "public static function getDisplayLocales($locale)\u00b6{\u00b6\u00acif (!isset(self::$locales[$locale])) {\u00b6\u00ac\u00ac$bundle = \\ResourceBundle::create($locale, self::getIcuDataDirectory().'/names');\u00b6\u00b6\u00ac\u00ac$collator = new \\Collator($locale);\u00b6\u00ac\u00ac$locales = array();\u00b6\u00ac\u00ac$bundleLocales = $bundle->get('Locales') ?: array();\u00b6\u00b6\u00ac\u00ac$fallbackLocale = self::getFallbackLocale($locale);\u00b6\u00ac\u00acif (null !== $fallbackLocale) {\u00b6\u00ac\u00ac\u00ac$locales = array_merge(self::getDisplayLocales($fallbackLocale), $locales);\u00b6\u00ac\u00ac}\u00b6\u00ac}\u00b6\u00acreturn self::$locales[$locale];\u00b6}"
+      },
+      {
+        "id": "3002",
+        "text": "public static function getIcuDataVersion()\u00b6{\u00b6\u00acstatic $dataVersion;\u00b6\u00b6\u00acif (null === $dataVersion) {\u00b6\u00ac\u00ac$dataVersion = self::ICU_DATA_VERSION;\u00b6\u00b6\u00ac\u00acif (getenv('USE_INTL_ICU_DATA_VERSION') && self::getIntlIcuVersion()) {\u00b6\u00ac\u00ac\u00ac$dataVersion = self::getIntlIcuVersion();\u00b6\u00b6\u00ac\u00ac\u00acpreg_match('/^(?P<version>[0-9].[0-9]|[0-9]{2,})/', $dataVersion, $matches);\u00b6\u00b6\u00ac\u00ac\u00ac$dataVersion = $matches['version'];\u00b6\u00ac\u00ac}\u00b6\u00ac}\u00b6\u00b6\u00acreturn $dataVersion;\u00b6}"
+      },
+      {
+        "id": "3003",
+        "text": "class Token\u00b6{\u00b6\u00acprivate $type;\u00b6\u00acprivate $value;\u00b6\u00acprivate $position;\u00b6\u00b6\u00acpublic function __construct($type, $value, $position)\u00b6\u00ac{\u00b6\u00ac\u00ac$this->type = $type;\u00b6\u00ac\u00ac$this->value = $value;\u00b6\u00ac\u00ac$this->position = $position;\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "3004",
+        "text": "public function getUri()\u00b6{\u00b6\u00ac$uri = trim($this->getRawUri());\u00b6\u00b6\u00acif (0 === strpos($uri, 'http')) {\u00b6\u00ac\u00acreturn $uri;\u00b6\u00ac}\u00b6\u00b6\u00acif ('#' === $uri[0]) {\u00b6\u00ac\u00ac$baseUri = $this->currentUri;\u00b6\u00ac\u00acif (false !== $pos = strpos($baseUri, '#')) {\u00b6\u00ac\u00ac\u00ac$baseUri = substr($baseUri, 0, $pos);\u00b6\u00ac\u00ac}\u00b6\u00b6\u00ac\u00acreturn $baseUri.$uri;\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "3005",
+        "text": "public function getType() {\u00b6\u00acif (isset($this->result['error'])) {\u00b6\u00ac\u00ac$error = $this->result['error'];\u00b6\u00ac\u00acif (is_string($error)) {\u00b6\u00ac\u00ac\u00acreturn $error;\u00b6\u00ac\u00ac} else if (is_array($error)) {\u00b6\u00ac\u00ac\u00acif (isset($error['type'])) {\u00b6\u00ac\u00ac\u00ac\u00acreturn $error['type'];\u00b6\u00ac\u00ac\u00ac}\u00b6\u00ac\u00ac}\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "3006",
+        "text": "public function setExtendedAccessToken() {\u00b6\u00actry {\u00b6\u00ac\u00ac$access_token_response = $this->_oauthRequest(\u00b6\u00ac\u00ac\u00ac$this->getUrl('graph', '/oauth/access_token'),\u00b6\u00ac\u00ac\u00ac$params = array(\u00b6\u00ac\u00ac\u00ac\u00ac'client_id' => $this->getAppId(),\u00b6\u00ac\u00ac\u00ac\u00ac'client_secret' => $this->getAppSecret(),\u00b6\u00ac\u00ac\u00ac\u00ac'grant_type' => 'fb_exchange_token',\u00b6\u00ac\u00ac\u00ac\u00ac'fb_exchange_token' => $this->getAccessToken(),\u00b6\u00ac\u00ac\u00ac)\u00b6\u00ac\u00ac);\u00b6\u00ac}\u00b6\u00accatch (FacebookApiException $e) {\u00b6\u00ac\u00acreturn false;\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "3007",
+        "text": "public function api(/* polymorphic */) {\u00b6\u00ac$args = func_get_args();\u00b6\u00acif (is_array($args[0])) {\u00b6\u00ac\u00acreturn $this->_restserver($args[0]);\u00b6\u00ac} else {\u00b6\u00ac\u00acreturn call_user_func_array(array($this, '_graph'), $args);\u00b6\u00ac}\u00b6}"
+      },
+      {
+        "id": "3008",
+        "text": "protected function _restserver($params) {\u00b6\u00ac$params['api_key'] = $this->getAppId();\u00b6\u00ac$params['format'] = 'json-strings';\u00b6\u00b6\u00ac$result = json_decode($this->_oauthRequest(\u00b6\u00ac\u00ac$this->getApiUrl($params['method']),\u00b6\u00ac\u00ac$params\u00b6\u00ac), true);\u00b6\u00b6\u00acif (is_array($result) && isset($result['error_code'])) {\u00b6\u00ac\u00ac$this->throwAPIException($result);\u00b6\u00ac}\u00b6\u00b6\u00acreturn $result;\u00b6}"
+      },
+      {
+        "id": "3009",
+        "text": "public function addUse($use, $as = null)\u00b6{\u00b6\u00acif (is_array($use) && array_key_exists('use', $use) && array_key_exists('as', $use)) {\u00b6\u00ac\u00ac$uses = $use;\u00b6\u00ac\u00ac$use  = $uses['use'];\u00b6\u00ac\u00ac$as   = $uses['as'];\u00b6\u00ac}\u00b6\u00ac$use = trim($use, '\\');\u00b6\u00acif ($as === null) {\u00b6\u00ac\u00ac$as\u00ac\u00ac\u00ac\u00ac  = trim($use, '\\');\u00b6\u00ac\u00ac$nsSeparatorPosition = strrpos($as, '\\');\u00b6\u00ac\u00acif ($nsSeparatorPosition !== false && $nsSeparatorPosition !== 0 && $nsSeparatorPosition != strlen($as)) {\u00b6\u00ac\u00ac\u00ac$as = substr($as, $nsSeparatorPosition + 1);\u00b6\u00ac\u00ac}\u00b6\u00ac}\u00b6\u00ac$this->uses[$use] = $as;\u00b6}"
+      },
+      {
+        "id": "3010",
+        "text": "if ($classReflection->inNamespace()) {\u00b6\u00ac$cg->setNamespaceName($classReflection->getNamespaceName());\u00b6}\u00b6\u00b6$parentClass = $classReflection->getParentClass();\u00b6if ($parentClass) {\u00b6\u00ac$cg->setExtendedClass($parentClass->getName());\u00b6\u00ac$interfaces = array_diff($classReflection->getInterfaces(), $parentClass->getInterfaces());\u00b6} else {\u00b6\u00ac$interfaces = $classReflection->getInterfaces();\u00b6}"
+      }
+    ],
+    "name": "Code: PHP"
+  },
+  {
+    "id": "44",
+    "lessonString": [
+      {
+        "id": "3501",
+        "text": "import os.path\u00b6\u00b6certifi = None\u00b6\u00b6def where():\u00b6\u00acif certifi:\u00b6\u00ac\u00acreturn certifi.where()\u00b6\u00b6\u00acreturn os.path.join(os.path.dirname(__file__), 'cacert.pem')\u00b6\u00b6if __name__ == '__main__':\u00b6\u00acprint(where())"
+      },
+      {
+        "id": "3502",
+        "text": "def remove_cookie_by_name(cookiejar, name, domain=None, path=None):\u00b6\u00acclearables = []\u00b6\u00acfor cookie in cookiejar:\u00b6\u00ac\u00acif cookie.name == name:\u00b6\u00ac\u00ac\u00acif domain is None or domain == cookie.domain:\u00b6\u00ac\u00ac\u00ac\u00acif path is None or path == cookie.path:\u00b6\u00ac\u00ac\u00ac\u00ac\u00acclearables.append((cookie.domain, cookie.path, cookie.name))\u00b6\u00b6\u00acfor domain, path, name in clearables:\u00b6\u00ac\u00accookiejar.clear(domain, path, name)"
+      },
+      {
+        "id": "3503",
+        "text": "def set(self, name, value, **kwargs):\u00b6\u00acif value is None:\u00b6\u00ac\u00acremove_cookie_by_name(self, name, domain=kwargs.get('domain'), path=kwargs.get('path'))\u00b6\u00ac\u00acreturn\u00b6\u00b6\u00acif isinstance(value, Morsel):\u00b6\u00ac\u00acc = morsel_to_cookie(value)\u00b6\u00acelse:\u00b6\u00ac\u00acc = create_cookie(name, value, **kwargs)\u00b6\u00acself.set_cookie(c)\u00b6\u00acreturn c"
+      },
+      {
+        "id": "3504",
+        "text": "def build_digest_header(self, method, url):\u00b6\u00acalgorithm = algorithm.upper()\u00b6\u00b6\u00acif algorithm == 'MD5':\u00b6\u00ac\u00acdef md5_utf8(x):\u00b6\u00ac\u00ac\u00acif isinstance(x, str):\u00b6\u00ac\u00ac\u00ac\u00acx = x.encode('utf-8')\u00b6\u00ac\u00ac\u00acreturn hashlib.md5(x).hexdigest()\u00b6\u00ac\u00achash_utf8 = md5_utf8\u00b6\u00acelif algorithm == 'SHA':\u00b6\u00ac\u00acdef sha_utf8(x):\u00b6\u00ac\u00ac\u00acif isinstance(x, str):\u00b6\u00ac\u00ac\u00ac\u00acx = x.encode('utf-8')\u00b6\u00ac\u00ac\u00acreturn hashlib.sha1(x).hexdigest()\u00b6\u00ac\u00achash_utf8 = sha_utf8\u00b6\u00b6\u00acKD = lambda s, d: hash_utf8(\"%s:%s\" % (s, d))"
+      },
+      {
+        "id": "3505",
+        "text": "if qop == 'auth':\u00b6\u00acif nonce == self.last_nonce:\u00b6\u00ac\u00acself.nonce_count += 1\u00b6\u00acelse:\u00b6\u00ac\u00acself.nonce_count = 1\u00b6\u00b6\u00acncvalue = '%08x' % self.nonce_count\u00b6\u00acs = str(self.nonce_count).encode('utf-8')\u00b6\u00acs += nonce.encode('utf-8')\u00b6\u00acs += time.ctime().encode('utf-8')\u00b6\u00acs += os.urandom(8)\u00b6\u00b6\u00accnonce = (hashlib.sha1(s).hexdigest()[:16])\u00b6\u00acnoncebit = \"%s:%s:%s:%s:%s\" % (nonce, ncvalue, cnonce, qop, hash_utf8(A2))\u00b6\u00acrespdig = KD(hash_utf8(A1), noncebit)"
+      },
+      {
+        "id": "3506",
+        "text": "from .structures import LookupDict\u00b6\u00b6codes = LookupDict(name='status_codes')\u00b6\u00b6for (code, titles) in list(_codes.items()):\u00b6\u00acfor title in titles:\u00b6\u00ac\u00acsetattr(codes, title, code)\u00b6\u00ac\u00acif not title.startswith('\\\\'):\u00b6\u00ac\u00ac\u00acsetattr(codes, title.upper(), code)"
+      },
+      {
+        "id": "3507",
+        "text": "def __eq__(self, other):\u00b6\u00acreturn self.__class__.__module__ == other.__class__.__module__ and \\\u00b6\u00ac\u00ac\u00acself.__class__.__name__ == other.__class__.__name__ and \\\u00b6\u00ac\u00ac\u00acself.wrapper_module == other.wrapper_module and \\\u00b6\u00ac\u00ac\u00acself.module_choices == other.module_choices\u00b6\u00b6def __ne__(self, other):\u00b6\u00acreturn not self.__eq__(other)\u00b6\u00b6def install(self):\u00b6\u00acsys.meta_path[:] = [x for x in sys.meta_path if self != x] + [self]"
+      },
+      {
+        "id": "3508",
+        "text": "def load_module(self, fullname):\u00b6\u00acif fullname in sys.modules:\u00b6\u00ac\u00acreturn sys.modules[fullname]\u00b6\u00acmodname = fullname.split('.', self.prefix_cutoff)[self.prefix_cutoff]\u00b6\u00acfor path in self.module_choices:\u00b6\u00ac\u00acrealname = path % modname\u00b6\u00ac\u00actry:\u00b6\u00ac\u00ac\u00ac__import__(realname)\u00b6\u00ac\u00acexcept ImportError:\u00b6\u00ac\u00ac\u00acexc_type, exc_value, tb = sys.exc_info()\u00b6\u00ac\u00ac\u00acsys.modules.pop(fullname, None)"
+      },
+      {
+        "id": "3509",
+        "text": "def parse_changelog():\u00b6\u00acwith open('CHANGES') as f:\u00b6\u00ac\u00aclineiter = iter(f)\u00b6\u00ac\u00acfor line in lineiter:\u00b6\u00ac\u00ac\u00acmatch = re.search('^Version\\s+(.*)', line.strip())\u00b6\u00ac\u00ac\u00acif match is None:\u00b6\u00ac\u00ac\u00ac\u00accontinue\u00b6\u00ac\u00ac\u00aclength = len(match.group(1))\u00b6\u00ac\u00ac\u00acversion = match.group(1).strip()\u00b6\u00ac\u00ac\u00acif lineiter.next().count('-') != len(match.group(0)):\u00b6\u00ac\u00ac\u00ac\u00accontinue\u00b6\u00ac\u00ac\u00acwhile 1:\u00b6\u00ac\u00ac\u00ac\u00acchange_info = lineiter.next().strip()\u00b6\u00ac\u00ac\u00ac\u00acif change_info:\u00b6\u00ac\u00ac\u00ac\u00ac\u00acbreak"
+      },
+      {
+        "id": "3510",
+        "text": "import os\u00b6import os.path\u00b6import tornado.web\u00b6import tornado.wsgi\u00b6\u00b6class ContentHandler(tornado.web.RequestHandler):\u00b6\u00acdef get(self, path=\"index\"):\u00b6\u00ac\u00acpaths = (\"index\",)\u00b6\u00ac\u00acif path not in paths:\u00b6\u00ac\u00ac\u00acraise tornado.web.HTTPError(404)\u00b6\u00ac\u00acself.render(path + \".html\", version=tornado.version)"
+      },
+      {
+        "id": "3511",
+        "text": "import os\u00b6from optparse import OptionParser\u00b6from subprocess import call, Popen, PIPE\u00b6\u00b6def _get_locale_dirs(include_core=True):\u00b6\u00accontrib_dir = os.path.join(os.getcwd(), 'django', 'contrib')\u00b6\u00acdirs = []\u00b6\u00acfor contrib_name in os.listdir(contrib_dir):\u00b6\u00ac\u00acpath = os.path.join(contrib_dir, contrib_name, 'locale')\u00b6\u00ac\u00acif os.path.isdir(path):\u00b6\u00ac\u00ac\u00acdirs.append((contrib_name, path))\u00b6\u00ac\u00ac\u00acif contrib_name in HAVE_JS:\u00b6\u00ac\u00ac\u00ac\u00acdirs.append((\"%s-js\" % contrib_name, path))\u00b6\u00acif include_core:\u00b6\u00ac\u00acdirs.insert(0, ('core', os.path.join(os.getcwd(), 'django', 'conf', 'locale')))\u00b6\u00acreturn dirs"
+      },
+      {
+        "id": "3512",
+        "text": "if __name__ == \"__main__\":\u00b6\u00acRUNABLE_SCRIPTS = ('update_catalogs', 'lang_stats', 'fetch')\u00b6\u00b6\u00acparser = OptionParser(usage=\"usage: %prog [options] cmd\")\u00b6\u00acparser.add_option(\"-r\", \"--resources\", action='append',\u00b6\u00ac\u00achelp=\"limit operation to the specified languages\")\u00b6\u00acoptions, args = parser.parse_args()\u00b6\u00b6\u00acif not args:\u00b6\u00ac\u00acparser.print_usage()\u00b6\u00ac\u00acexit(1)\u00b6\u00b6\u00acif args[0] in RUNABLE_SCRIPTS:\u00b6\u00ac\u00aceval(args[0])(options.resources, options.languages)\u00b6\u00acelse:\u00b6\u00ac\u00acprint(\"Available commands are: %s\" % \", \".join(RUNABLE_SCRIPTS))"
+      },
+      {
+        "id": "3513",
+        "text": "@property\u00b6def body(self):\u00b6\u00acif not hasattr(self, '_body'):\u00b6\u00ac\u00acif self._read_started:\u00b6\u00ac\u00ac\u00acraise Exception(\"You cannot access body after reading from request's data stream\")\u00b6\u00ac\u00actry:\u00b6\u00ac\u00ac\u00acself._body = self.read()\u00b6\u00ac\u00acexcept IOError as e:\u00b6\u00ac\u00ac\u00acsix.reraise(UnreadablePostError, UnreadablePostError(*e.args), sys.exc_info()[2])\u00b6\u00ac\u00acself._stream = BytesIO(self._body)\u00b6\u00acreturn self._body"
+      },
+      {
+        "id": "3514",
+        "text": "def parse_cookie(cookie):\u00b6\u00acif cookie == '':\u00b6\u00ac\u00acreturn {}\u00b6\u00acif not isinstance(cookie, http_cookies.BaseCookie):\u00b6\u00ac\u00actry:\u00b6\u00ac\u00ac\u00acc = SimpleCookie()\u00b6\u00ac\u00ac\u00acc.load(cookie)\u00b6\u00ac\u00acexcept http_cookies.CookieError:\u00b6\u00ac\u00ac\u00acreturn {}\u00b6\u00acelse:\u00b6\u00ac\u00acc = cookie\u00b6\u00accookiedict = {}\u00b6\u00acfor key in c.keys():\u00b6\u00ac\u00accookiedict[key] = c.get(key).value\u00b6\u00acreturn cookiedict"
+      },
+      {
+        "id": "3515",
+        "text": "def __iter__(self):\u00b6\u00acif self._base_content_is_iter:\u00b6\u00ac\u00acwarnings.warn(\u00b6\u00ac\u00ac\u00ac'Deprecated',\u00b6\u00ac\u00ac\u00acDeprecationWarning, stacklevel=2)\u00b6\u00acif not hasattr(self, '_iterator'):\u00b6\u00ac\u00acself._iterator = iter(self._container)\u00b6\u00acreturn self\u00b6\u00b6def write(self, content):\u00b6\u00acself._consume_content()\u00b6\u00acself._container.append(content)\u00b6\u00b6def tell(self):\u00b6\u00acself._consume_content()\u00b6\u00acreturn len(self.content)"
+      },
+      {
+        "id": "3516",
+        "text": "try:\u00b6\u00acprevious_rowkey = None\u00b6\u00acfor line in fileinput.input(input_files):\u00b6\u00ac\u00acrowkey, colkey, value = line.rstrip(\"\\n\").split(\"\\t\")\u00b6\u00b6\u00ac\u00acif rowkey != previous_rowkey:\u00b6\u00ac\u00ac\u00acwriter.newRow(bytes(rowkey))\u00b6\u00b6\u00ac\u00accoerced = coercer(value)\u00b6\u00ac\u00acwriter.addColumn(bytes(colkey), coerced, timestamp)\u00b6\u00b6\u00ac\u00acif fileinput.lineno() % 1000 == 0:\u00b6\u00ac\u00ac\u00acprint \"%d items processed (%s)\" % (a, b)\u00b6finally:\u00b6\u00acwriter.close()"
+      },
+      {
+        "id": "3517",
+        "text": "with CachedQueryMutator() as m:\u00b6\u00acwhile date > earliest_date:\u00b6\u00ac\u00acgildings = GildingsByDay.get_gildings(date)\u00b6\u00ac\u00acfullnames = [x[\"thing\"] for x in gildings]\u00b6\u00ac\u00acthings = Thing._by_fullname(fullnames, data=True, return_dict=False)\u00b6\u00ac\u00accomments = {t._fullname: t for t in things if isinstance(t, Comment)}\u00b6\u00b6\u00ac\u00acfor gilding in gildings:\u00b6\u00ac\u00ac\u00acfullname = gilding[\"thing\"]\u00b6\u00ac\u00ac\u00acif fullname in comments and fullname not in already_seen:\u00b6\u00ac\u00ac\u00ac\u00acthing = gilding[\"thing\"] = comments[fullname]\u00b6\u00ac\u00ac\u00ac\u00acgilding_object = Storage(gilding)\u00b6\u00ac\u00ac\u00ac\u00acm.insert(get_gilded_comments(thing.sr_id), [gilding_object])\u00b6\u00ac\u00ac\u00ac\u00acm.insert(get_all_gilded_comments(), [gilding_object])\u00b6\u00ac\u00ac\u00ac\u00acalready_seen.add(fullname)\u00b6\u00ac\u00acdate -= datetime.timedelta(days=1)"
+      },
+      {
+        "id": "3518",
+        "text": "import time\u00b6import hashlib\u00b6from ConfigParser import RawConfigParser\u00b6\u00b6@application.route('/fetch-trackers')\u00b6def fetch_trackers():\u00b6\u00acip = request.environ['REMOTE_ADDR']\u00b6\u00acjsonp_callback = request.args['callback']\u00b6\u00acids = request.args.getlist('ids[]')\u00b6\u00b6\u00acif len(ids) > 32:\u00b6\u00ac\u00acabort(400)"
+      },
+      {
+        "id": "3519",
+        "text": "def pytest_configure(config):\u00b6\u00acif not settings.configured:\u00b6\u00ac\u00acos.environ['DJANGO_SETTINGS_MODULE'] = 'sentry.conf.server'\u00b6\u00b6\u00actest_db = os.environ.get('DB', 'sqlite')\u00b6\u00acif test_db == 'mysql':\u00b6\u00ac\u00acsettings.DATABASES['default'].update({\u00b6\u00ac\u00ac\u00ac'ENGINE': 'django.db.backends.mysql',\u00b6\u00ac\u00ac\u00ac'NAME': 'sentry',\u00b6\u00ac\u00ac\u00ac'USER': 'root',\u00b6\u00ac\u00ac})"
+      },
+      {
+        "id": "3520",
+        "text": "if is_float(data['timestamp']):\u00b6\u00ac\u00actry:\u00b6\u00ac\u00ac\u00acdata['timestamp'] = datetime.fromtimestamp(float(data['timestamp']))\u00b6\u00ac\u00acexcept Exception:\u00b6\u00ac\u00ac\u00acraise InvalidTimestamp('Invalid value for timestamp: %r' % data['timestamp'])\u00b6\u00acelif not isinstance(data['timestamp'], datetime):\u00b6\u00ac\u00acif '.' in data['timestamp']:\u00b6\u00ac\u00ac\u00acformat = '%Y-%m-%dT%H:%M:%S.%f'\u00b6\u00ac\u00acelse:\u00b6\u00ac\u00ac\u00acformat = '%Y-%m-%dT%H:%M:%S'\u00b6\u00ac\u00acif 'Z' in data['timestamp']:\u00b6\u00ac\u00ac\u00acformat += 'Z'"
+      },
+      {
+        "id": "3521",
+        "text": "from sentry.conf import settings\u00b6from sentry.utils.imports import import_string\u00b6from threading import local\u00b6\u00b6class State(local):\u00b6\u00acrequest = None\u00b6\u00b6def get_buffer(path, options):\u00b6\u00accls = import_string(path)\u00b6\u00acif cls is None:\u00b6\u00ac\u00acraise ImportError('Unable to find module %s' % path)\u00b6\u00acreturn cls(**options)\u00b6\u00b6buffer = get_buffer(settings.BUFFER, settings.BUFFER_OPTIONS)\u00b6env = State()"
+      },
+      {
+        "id": "3522",
+        "text": "def perm_override(perm):\u00b6\u00acdef inner(func):\u00b6\u00ac\u00ac@wraps(func)\u00b6\u00ac\u00acdef wrapped(user, *args, **kwargs):\u00b6\u00ac\u00ac\u00acif user.has_perm('sentry.%s' % (perm,)):\u00b6\u00ac\u00ac\u00ac\u00acreturn True\u00b6\u00b6\u00ac\u00ac\u00acreturn func(user, *args, **kwargs)\u00b6\u00ac\u00acreturn wrapped\u00b6\u00acreturn inner"
+      },
+      {
+        "id": "3523",
+        "text": "def changequery(query=None, **kw):\u00b6\u00acif query is None:\u00b6\u00ac\u00acquery = web.rawinput(method='get')\u00b6\u00acfor k, v in kw.iteritems():\u00b6\u00ac\u00acif v is None:\u00b6\u00ac\u00ac\u00acquery.pop(k, None)\u00b6\u00ac\u00acelse:\u00b6\u00ac\u00ac\u00acquery[k] = v\u00b6\u00acout = web.ctx.path\u00b6\u00acif query:\u00b6\u00ac\u00acout += '?' + urlencode(query, doseq=True)\u00b6\u00acreturn out"
+      },
+      {
+        "id": "3524",
+        "text": "def profiler(app):\u00b6\u00acfrom utils import profile\u00b6\u00acdef profile_internal(e, o):\u00b6\u00ac\u00acout, result = profile(app)(e, o)\u00b6\u00ac\u00acreturn list(out) + ['<pre>' + net.websafe(result) + '</pre>']\u00b6\u00acreturn profile_internal\u00b6\u00b6if __name__ == \"__main__\":\u00b6\u00acimport doctest\u00b6\u00acdoctest.testmod()"
+      },
+      {
+        "id": "3525",
+        "text": "def validates(self, source=None, _validate=True, **kw):\u00b6\u00acsource = source or kw or web.input()\u00b6\u00acout = True\u00b6\u00acfor i in self.inputs:\u00b6\u00ac\u00acv = attrget(source, i.name)\u00b6\u00ac\u00acif _validate:\u00b6\u00ac\u00ac\u00acout = i.validate(v) and out\u00b6\u00ac\u00acelse:\u00b6\u00ac\u00ac\u00aci.set_value(v)\u00b6\u00acif _validate:\u00b6\u00ac\u00acout = out and self._validate(source)\u00b6\u00ac\u00acself.valid = out\u00b6\u00acreturn out"
+      },
+      {
+        "id": "3526",
+        "text": "try:\u00b6\u00actry:\u00b6\u00ac\u00acfor data in result:\u00b6\u00ac\u00ac\u00acif data:\u00b6\u00ac\u00ac\u00ac\u00acself.wsgi_write_data(data)\u00b6\u00acfinally:\u00b6\u00ac\u00acif hasattr(result, 'close'):\u00b6\u00ac\u00ac\u00acresult.close()\u00b6except socket.error, socket_err:\u00b6\u00acif (socket_err.args[0] in \\\u00b6\u00ac\u00ac(errno.ECONNABORTED, errno.EPIPE)):\u00b6\u00ac\u00acreturn\u00b6except socket.timeout, socket_timeout:\u00b6\u00acreturn"
+      },
+      {
+        "id": "3527",
+        "text": "class StaticApp(SimpleHTTPRequestHandler):\u00b6\u00acdef __init__(self, environ, start_response):\u00b6\u00ac\u00acself.headers = []\u00b6\u00ac\u00acself.environ = environ\u00b6\u00ac\u00acself.start_response = start_response\u00b6\u00b6\u00acdef send_response(self, status, msg=\"\"):\u00b6\u00ac\u00acself.status = str(status) + \" \" + msg\u00b6\u00b6\u00acdef send_header(self, name, value):\u00b6\u00ac\u00acself.headers.append((name, value))\u00b6\u00b6\u00acdef end_headers(self):\u00b6\u00ac\u00acpass"
+      },
+      {
+        "id": "3528",
+        "text": "@staticmethod\u00b6def nameQuality(name):\u00b6\u00b6\u00acname = os.path.basename(name)\u00b6\u00b6\u00acfor x in Quality.qualityStrings:\u00b6\u00ac\u00acif x == Quality.UNKNOWN:\u00b6\u00ac\u00ac\u00accontinue\u00b6\u00b6\u00ac\u00acregex = '\\W'+Quality.qualityStrings[x].replace(' ','\\W')+'\\W'\u00b6\u00ac\u00acregex_match = re.search(regex, name, re.I)\u00b6\u00ac\u00acif regex_match:\u00b6\u00ac\u00ac\u00acreturn x"
+      },
+      {
+        "id": "3529",
+        "text": "def __str__(self):\u00b6\u00b6\u00acif self.provider == None:\u00b6\u00ac\u00acreturn \"Invalid provider, unable to print self\"\u00b6\u00b6\u00acmyString = self.provider.name + \" @ \" + self.url + \"\\n\"\u00b6\u00acmyString += \"Extra Info:\\n\"\u00b6\u00acfor extra in self.extraInfo:\u00b6\u00ac\u00acmyString += \"  \" + extra + \"\\n\"\u00b6\u00acreturn myString\u00b6\u00b6def fileName(self):\u00b6\u00acreturn self.episodes[0].prettyName() + \".\" + self.resultType"
+      },
+      {
+        "id": "3530",
+        "text": "class SchemaUpgrade (object):\u00b6\u00acdef __init__(self, connection):\u00b6\u00ac\u00acself.connection = connection\u00b6\u00b6\u00acdef checkDBVersion(self):\u00b6\u00ac\u00acresult = self.connection.select(\"SELECT db_version FROM db_version\")\u00b6\u00ac\u00acif result:\u00b6\u00ac\u00ac\u00acreturn int(result[0][\"db_version\"])\u00b6\u00ac\u00acelse:\u00b6\u00ac\u00ac\u00acreturn 0\u00b6\u00b6\u00acdef incDBVersion(self):\u00b6\u00ac\u00accurVersion = self.checkDBVersion()\u00b6\u00ac\u00acself.connection.action(\"UPDATE db_version SET db_version = ?\", [curVersion+1])\u00b6\u00ac\u00acreturn curVersion+1"
+      },
+      {
+        "id": "3531",
+        "text": "try:\u00b6\u00acyield\u00b6finally:\u00b6\u00acif clean_revert:\u00b6\u00ac\u00acfor key, value in variables.iteritems():\u00b6\u00ac\u00ac\u00acif key in state.env and value == state.env[key]:\u00b6\u00ac\u00ac\u00ac\u00acif key in previous:\u00b6\u00ac\u00ac\u00ac\u00ac\u00acstate.env[key] = previous[key]\u00b6\u00ac\u00ac\u00ac\u00acelse:\u00b6\u00ac\u00ac\u00ac\u00ac\u00acdel state.env[key]\u00b6\u00acelse:\u00b6\u00ac\u00acstate.env.update(previous)\u00b6\u00ac\u00acfor key in new:\u00b6\u00ac\u00ac\u00acdel state.env[key]"
+      }
+    ],
+    "name": "Code: Python"
+  },
+  {
+    "id": "45",
+    "lessonString": [
+      {
+        "id": "4001",
+        "text": "module Serializers\u00b6\u00acextend ActiveSupport::Autoload\u00b6\u00b6\u00aceager_autoload do\u00b6\u00ac\u00acautoload :JSON\u00b6\u00ac\u00acautoload :Xml\u00b6\u00acend\u00b6end\u00b6\u00b6def eager_load!\u00b6\u00acsuper\u00b6\u00acActiveModel::Serializer.eager_load!\u00b6end"
+      },
+      {
+        "id": "4002",
+        "text": "module Model\u00b6\u00acdef self.included(base) #:nodoc:\u00b6\u00ac\u00acbase.class_eval do\u00b6\u00ac\u00ac\u00acextend  ActiveModel::Naming\u00b6\u00ac\u00ac\u00acextend  ActiveModel::Translation\u00b6\u00ac\u00ac\u00acinclude ActiveModel::Validations\u00b6\u00ac\u00ac\u00acinclude ActiveModel::Conversion\u00b6\u00ac\u00acend\u00b6\u00acend\u00b6\u00b6\u00acdef initialize(params={})\u00b6\u00ac\u00acparams.each do |attr, value|\u00b6\u00ac\u00ac\u00acself.public_send(\"#{attr}=\", value)\u00b6\u00ac\u00acend if params\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4003",
+        "text": "module ClassMethods #:nodoc:\u00b6\u00acdef _to_partial_path #:nodoc:\u00b6\u00ac\u00ac@_to_partial_path ||= begin\u00b6\u00ac\u00ac\u00acelement = ActiveSupport::Inflector.underscore(ActiveSupport::Inflector.demodulize(self))\u00b6\u00ac\u00ac\u00accollection = ActiveSupport::Inflector.tableize(self)\u00b6\u00ac\u00ac\u00ac\"#{collection}/#{element}\".freeze\u00b6\u00ac\u00acend\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4004",
+        "text": "def _define_after_model_callback(klass, callback) #:nodoc:\u00b6\u00acklass.class_eval <<-CALLBACK, __FILE__, __LINE__ + 1\u00b6\u00ac\u00acdef self.after_#{callback}(*args, &block)\u00b6\u00ac\u00ac\u00acoptions = args.extract_options!\u00b6\u00ac\u00ac\u00acoptions[:prepend] = true\u00b6\u00ac\u00ac\u00acoptions[:if] = Array(options[:if]) << \"value != false\"\u00b6\u00ac\u00ac\u00acset_callback(:#{callback}, :after, *(args << options), &block)\u00b6\u00ac\u00acend\u00b6\u00acCALLBACK\u00b6end"
+      },
+      {
+        "id": "4005",
+        "text": "module ActiveModel\u00b6\u00acmodule Serializers\u00b6\u00ac\u00acmodule JSON\u00b6\u00ac\u00ac\u00acextend ActiveSupport::Concern\u00b6\u00ac\u00ac\u00acinclude ActiveModel::Serialization\u00b6\u00b6\u00ac\u00ac\u00acincluded do\u00b6\u00ac\u00ac\u00ac\u00acextend ActiveModel::Naming\u00b6\u00b6\u00ac\u00ac\u00ac\u00acclass_attribute :include_root_in_json\u00b6\u00ac\u00ac\u00ac\u00acself.include_root_in_json = false\u00b6\u00ac\u00ac\u00acend\u00b6\u00ac\u00acend\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4006",
+        "text": "if superenv?\u00b6\u00acENV.deps = keg_only_deps.map(&:to_s)\u00b6\u00acENV.all_deps = f.recursive_dependencies.map(&:to_s)\u00b6\u00acENV.x11 = f.recursive_requirements.detect { |rq| rq.kind_of?(X11Dependency) }\u00b6\u00acENV.setup_build_environment\u00b6\u00acpost_superenv_hacks(f)\u00b6\u00acf.recursive_requirements.each(&:modify_build_environment)\u00b6else\u00b6\u00acENV.setup_build_environment\u00b6\u00acf.recursive_requirements.each(&:modify_build_environment)\u00b6end"
+      },
+      {
+        "id": "4007",
+        "text": "def fixopt f\u00b6\u00acpath = if f.linked_keg.directory? and f.linked_keg.symlink?\u00b6\u00ac\u00acf.linked_keg.realpath\u00b6\u00acelsif f.prefix.directory?\u00b6\u00ac\u00acf.prefix\u00b6\u00acelsif (kids = f.rack.children).size == 1 and kids.first.directory?\u00b6\u00ac\u00ackids.first\u00b6\u00acelse\u00b6\u00ac\u00acraise\u00b6\u00acend\u00b6\u00acKeg.new(path).optlink\u00b6rescue StandardError\u00b6\u00acraise \"#{f.opt_prefix} not present or broken\\nPlease reinstall #{f}. Sorry :(\"\u00b6end"
+      },
+      {
+        "id": "4008",
+        "text": "def show\u00b6\u00acif user_signed_in?\u00b6\u00ac\u00acredirect_to stream_path\u00b6\u00acelsif is_mobile_device?\u00b6\u00ac\u00acunless(File.exist?(Rails.root.join('app', 'views', 'home', '_show.mobile.erb')))\u00b6\u00ac\u00ac\u00acredirect_to user_session_path\u00b6\u00ac\u00acelse\u00b6\u00ac\u00ac\u00acrender :show, :layout => 'post'\u00b6\u00ac\u00acend\u00b6\u00acelse\u00b6\u00ac\u00acrender :show, :layout => 'post'\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4009",
+        "text": "def create\u00b6\u00ac@reshare = current_user.build_post(:reshare, :root_guid => params[:root_guid])\u00b6\u00acif @reshare.save\u00b6\u00ac\u00accurrent_user.add_to_streams(@reshare, current_user.aspects)\u00b6\u00ac\u00accurrent_user.dispatch_post(@reshare, :url => post_url(@reshare), :additional_subscribers => @reshare.root_author)\u00b6\u00ac\u00acrender :json => ExtremePostPresenter.new(@reshare, current_user), :status => 201\u00b6\u00acelse\u00b6\u00ac\u00acrender :nothing => true, :status => 422\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4010",
+        "text": "class NoSuchKegError < RuntimeError\u00b6\u00acattr :name\u00b6\u00b6\u00acdef initialize name\u00b6\u00ac\u00ac@name = name\u00b6\u00ac\u00acsuper \"No such keg: #{HOMEBREW_CELLAR}/#{name}\"\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4011",
+        "text": "def initialize expected, actual\u00b6\u00ac@expected = expected\u00b6\u00ac@actual = actual\u00b6\u00ac@hash_type = expected.hash_type.to_s.upcase\u00b6\u00b6\u00acsuper <<-EOS.undent\u00b6\u00ac\u00ac#{@hash_type} mismatch\u00b6\u00ac\u00acExpected: #{@expected}\u00b6\u00ac\u00acActual: #{@actual}\u00b6\u00ac\u00acEOS\u00b6end"
+      },
+      {
+        "id": "4012",
+        "text": "require 'pathname'\u00b6\u00b6def ignore_interrupts(opt = nil)\u00b6\u00acstd_trap = trap(\"INT\") do\u00b6\u00ac\u00acputs \"One sec, just cleaning up\" unless opt == :quietly\u00b6\u00acend\u00b6\u00acyield\u00b6ensure\u00b6\u00actrap(\"INT\", std_trap)\u00b6end"
+      },
+      {
+        "id": "4013",
+        "text": "def gzip *paths\u00b6\u00acpaths.collect do |path|\u00b6\u00ac\u00acsystem \"/usr/bin/gzip\", path\u00b6\u00ac\u00acPathname.new(\"#{path}.gz\")\u00b6\u00acend\u00b6end\u00b6\u00b6def archs_for_command cmd\u00b6\u00accmd = which(cmd) unless Pathname.new(cmd).absolute?\u00b6\u00acPathname.new(cmd).archs\u00b6end"
+      },
+      {
+        "id": "4014",
+        "text": "protected\u00b6\u00acdef self.sysctl_bool(property)\u00b6\u00ac\u00acresult = nil\u00b6\u00ac\u00acIO.popen(\"/usr/sbin/sysctl -n #{property} 2>/dev/null\") do |f|\u00b6\u00ac\u00ac\u00acresult = f.gets.to_i\u00b6\u00ac\u00acend\u00b6\u00ac\u00ac$?.success? && result == 1\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4015",
+        "text": "def self.all_properties\u00b6\u00ac@_all_properties ||= begin\u00b6\u00ac\u00acconfig_lines = Twig.run('git config --list').split(\"\\n\")\u00b6\u00b6\u00ac\u00acproperties = config_lines.map do |line|\u00b6\u00ac\u00ac\u00ackey, value = line.match(/(.+)=(.+)/)[1..2]\u00b6\u00b6\u00ac\u00ac\u00ackey_parts = key.split('.')\u00b6\u00ac\u00ac\u00ackey_parts.last if key_parts[0] == 'branch' && key_parts.size > 2\u00b6\u00ac\u00acend.compact\u00b6\u00b6\u00ac\u00acproperties.uniq.sort - RESERVED_BRANCH_PROPERTIES\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4016",
+        "text": "def abilities\u00b6\u00ac@abilities ||= begin\u00b6\u00ac\u00ac\u00ac\u00ac\u00acabilities = Six.new\u00b6\u00ac\u00ac\u00ac\u00ac\u00acabilities << Ability\u00b6\u00ac\u00ac\u00ac\u00ac\u00acabilities\u00b6\u00ac\u00ac\u00ac\u00ac\u00acend\u00b6end\u00b6\u00b6def can?(object, action, subject)\u00b6\u00acabilities.allowed?(object, action, subject)\u00b6end"
+      },
+      {
+        "id": "4017",
+        "text": "class SearchContext\u00b6\u00acattr_accessor :project_ids, :params\u00b6\u00b6\u00acdef initialize(project_ids, params)\u00b6\u00ac\u00ac@project_ids, @params = project_ids, params.dup\u00b6\u00acend\u00b6\u00b6\u00acdef result\u00b6\u00ac\u00ac@result ||= {\u00b6\u00ac\u00ac\u00acprojects: [],\u00b6\u00ac\u00ac\u00acmerge_requests: [],\u00b6\u00ac\u00ac\u00acissues: [],\u00b6\u00ac\u00ac\u00acwiki_pages: []\u00b6\u00ac\u00ac}\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4018",
+        "text": "class LabelsController < ProjectResourceController\u00b6\u00acbefore_filter :module_enabled\u00b6\u00b6\u00acbefore_filter :authorize_read_issue!\u00b6\u00b6\u00acrespond_to :js, :html\u00b6\u00b6\u00acprotected\u00b6\u00b6\u00acdef module_enabled\u00b6\u00ac\u00acreturn render_404 unless @project.issues_enabled\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4019",
+        "text": "def subject(*extra)\u00b6\u00acsubject = \"GitLab\"\u00b6\u00acsubject << (@project ? \" | #{@project.name_with_namespace}\" : \"\")\u00b6\u00acsubject << \" | \" + extra.join(' | ') if extra.present?\u00b6\u00acsubject\u00b6end"
+      },
+      {
+        "id": "4020",
+        "text": "class Configuration\u00b6\u00acattr_accessor :processor_class, :reply_delimiter, :to\u00b6\u00b6\u00acdef to\u00b6\u00ac\u00ac@to ||= :token\u00b6\u00acend\u00b6\u00b6\u00acdef reply_delimiter\u00b6\u00ac\u00ac@reply_delimiter ||= 'Reply ABOVE THIS LINE'\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4021",
+        "text": "class MoviesController < ApplicationController\u00b6\u00acdef index\u00b6\u00ac\u00acsort = params[:sort] || session[:sort]\u00b6\u00ac\u00accase sort\u00b6\u00ac\u00acwhen 'title'\u00b6\u00ac\u00ac\u00acordering,@title_header = {:order => :title}, 'hilite'\u00b6\u00ac\u00acwhen 'release_date'\u00b6\u00ac\u00ac\u00acordering,@date_header = {:order => :release_date}, 'hilite'\u00b6\u00ac\u00acend\u00b6\u00ac\u00ac@all_ratings = Movie.all_ratings\u00b6\u00ac\u00ac@selected_ratings = params[:ratings] || session[:ratings] || {}\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4022",
+        "text": "def deep_merge(hash)\u00b6\u00actarget = dup\u00b6\u00b6\u00achash.keys.each do |key|\u00b6\u00ac\u00acif hash[key].is_a? Hash and self[key].is_a? Hash\u00b6\u00ac\u00ac\u00actarget[key] = target[key].deep_merge(hash[key])\u00b6\u00ac\u00ac\u00acnext\u00b6\u00ac\u00acend\u00b6\u00b6\u00ac\u00actarget[key] = hash[key]\u00b6\u00acend\u00b6\u00b6\u00actarget\u00b6end"
+      },
+      {
+        "id": "4023",
+        "text": "def write(dest)\u00b6\u00acpath = destination(dest)\u00b6\u00acFileUtils.mkdir_p(File.dirname(path))\u00b6\u00acFile.open(path, 'w') do |f|\u00b6\u00ac\u00acf.write(self.output)\u00b6\u00acend\u00b6end\u00b6\u00b6def inspect\u00b6\u00ac\"<Post: #{self.id}>\"\u00b6end"
+      },
+      {
+        "id": "4024",
+        "text": "def array_to_sentence_string(array)\u00b6\u00acconnector = \"and\"\u00b6\u00accase array.length\u00b6\u00acwhen 0\u00b6\u00ac\u00ac\"\"\u00b6\u00acwhen 1\u00b6\u00ac\u00acarray[0].to_s\u00b6\u00acwhen 2\u00b6\u00ac\u00ac\"#{array[0]} #{connector} #{array[1]}\"\u00b6\u00acelse\u00b6\u00ac\u00ac\"#{array[0...-1].join(', ')}, #{connector} #{array[-1]}\"\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4025",
+        "text": "def self.priority(priority = nil)\u00b6\u00ac@priority ||= nil\u00b6\u00acif priority && PRIORITIES.has_key?(priority)\u00b6\u00ac\u00ac@priority = priority\u00b6\u00acend\u00b6\u00ac@priority || :normal\u00b6end\u00b6\u00b6def self.<=>(other)\u00b6\u00acPRIORITIES[other.priority] <=> PRIORITIES[self.priority]\u00b6end"
+      },
+      {
+        "id": "4026",
+        "text": "module Jekyll\u00b6\u00acclass Page\u00b6\u00ac\u00acinclude Convertible\u00b6\u00b6\u00ac\u00acattr_writer :dir\u00b6\u00ac\u00acattr_accessor :site, :pager\u00b6\u00ac\u00acattr_accessor :name, :ext, :basename\u00b6\u00ac\u00acattr_accessor :data, :content, :output\u00b6\u00b6\u00ac\u00acdef read_yaml(base, name)\u00b6\u00ac\u00ac\u00acsuper(base, name)\u00b6\u00ac\u00ac\u00acself.data['layout'] = 'page' unless self.data.has_key?('layout')\u00b6\u00ac\u00ac\u00acself.data\u00b6\u00ac\u00acend\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4027",
+        "text": "while layout\u00b6\u00acpayload = payload.deep_merge({\"content\" => self.output, \"page\" => layout.data})\u00b6\u00b6\u00acbegin\u00b6\u00ac\u00acself.output = Liquid::Template.parse(layout.content).render!(payload, info)\u00b6\u00acrescue => e\u00b6\u00ac\u00acputs \"Liquid Exception: #{e.message} in #{self.data[\"layout\"]}\"\u00b6\u00ac\u00ace.backtrace.each do |backtrace|\u00b6\u00ac\u00ac\u00acputs backtrace\u00b6\u00ac\u00acend\u00b6\u00ac\u00acabort(\"Build Failed\")\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4028",
+        "text": "def peek(queue, start = 0, count = 1)\u00b6\u00acresult = queue(queue).slice(start, count)\u00b6\u00b6\u00acif result.nil?\u00b6\u00ac\u00ac[]\u00b6\u00acelsif result.respond_to?(:to_ary)\u00b6\u00ac\u00acresult.to_ary || [result]\u00b6\u00acelse\u00b6\u00ac\u00ac[result]\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4029",
+        "text": "def load_resource_instance\u00b6\u00acif !parent? && new_actions.include?(@params[:action].to_sym)\u00b6\u00ac\u00acbuild_resource\u00b6\u00acelsif id_param || @options[:singleton]\u00b6\u00ac\u00acfind_resource\u00b6\u00acend\u00b6end"
+      },
+      {
+        "id": "4030",
+        "text": "def collection_actions\u00b6\u00ac[:index] + [@options[:collection]].flatten\u00b6end\u00b6\u00b6def new_actions\u00b6\u00ac[:new, :create] + [@options[:new]].flatten\u00b6end\u00b6\u00b6private\u00b6\u00b6def extract_key(value)\u00b6\u00ac value.to_s.underscore.gsub('/', '_')\u00b6end"
+      },
+      {
+        "id": "4031",
+        "text": "require 'formtastic/engine' if defined?(::Rails)\u00b6\u00b6module Formtastic\u00b6\u00acextend ActiveSupport::Autoload\u00b6\u00b6\u00acautoload :FormBuilder\u00b6\u00acautoload :Helpers\u00b6\u00acautoload :HtmlAttributes\u00b6\u00b6\u00ac# @private\u00b6\u00acclass UnknownInputError < NameError\u00b6\u00acend\u00b6end"
+      }
+    ],
+    "name": "Code: Ruby"
+  }
+]

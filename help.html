@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="https://www.facebook.com/2008/fbml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="title" content="Help" />
+    <meta property="og:title" content="/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/images/logo.png" />
+    <meta property="og:site_name" content="/" />
+    <title>Help</title>
+    <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
+    <link rel="image_src" href="/" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/../bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/../bootstrap/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/../aw-showcase/css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/helpSuccess.css" />
+    <script type="text/javascript" src="/js/../jquery/jquery.js"></script>
+    <script type="text/javascript" src="/js/../bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/../aw-showcase/js/jquery.aw-showcase.js"></script>
+    <script type="text/javascript" src="/js/helpSuccess.js"></script>
+
+    <meta name="description" content="Learn and practice touch typing. Easy and hassle-free."/>
+    <meta name="keywords" content="typing, typing tutor, touch typing, typing lessons, typing practice"/>
+
+    <style>
+      body {
+        height: 100%;
+        padding-top: 60px; 
+        overflow: auto;
+      }
+    </style>
+
+    <script src='/google_analytics_auto.js'></script></head>
+  <body>
+    <div class="wrapper">
+
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+
+            <a class="brand" href="/">Data type</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav" id="nav_list">
+                <div class="btn-group">
+                  <button class="btn category" id="category_1" data-toggle="button">Learn</button>
+                  <button class="btn category" id="category_2" data-toggle="button">Practice</button>
+                  <button class="btn category" id="category_3" data-toggle="button">Code</button>
+                </div>
+              </ul>
+            </div><!--/.nav-collapse -->
+
+            <div class="nav pull-right">
+              <button class="btn" id="btnOptions">Options</button>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /navbar -->
+      <script type="text/javascript">
+        $('.category').each(function () {
+          $(this).removeClass('active');
+        }).click(function () {
+          var categoryId = $(this).attr('id');
+          categoryId = categoryId.split('_');
+          $('#contactForm #category').attr('value', categoryId[1]);
+          $('#contactForm').submit();
+        });
+$('#btnOptions').hide();
+      </script>
+
+      <div style="width: 700px; margin: auto;">
+
+        <!-- This is the button used to switch between One Page and Slideshow. -->
+
+        <div id="showcase" class="showcase">
+          <!-- Each child div in #showcase represents a slide -->
+          <div class="showcase-slide">
+            <!-- Put the slide content in a div with the class .showcase-content -->
+            <div class="showcase-content">
+              <div class="showcase-content-wrapper">
+                <h2>What is touch typing?</h2>
+                <p>Touch typing is typing without looking at the keyboard. You use your fingers and muscle memory to find the keys.</p>
+                <br/>
+                <h2>How can I learn touch typing?</h2>
+                <p>You must first learn how to place your fingers on the keyboard and how to move them to find the relevant keys. Then you must practice a lot to improve your speed and accuracy.</p>
+                <p>This application is designed to make this easy for you. You can both learn and practice here with the heap of lessons and practice sessions available.</p>
+                <br/>
+                <br/>
+                <p>Proceed to the next slide by clicking on the '>' button or by pressing the right arrow key.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Each child div in #showcase represents a slide -->
+          <div class="showcase-slide">
+            <!-- Put the slide content in a div with the class .showcase-content. -->
+            <div class="showcase-content-wrapper">
+              <h3>Before you begin, here's something to know first</h3>
+              <h2>What is WPM?</h2>
+              <p>WPM stands for Words Per Minute. This is calculated by dividing the number of letters you type per minute by 5. The higher the WPM, the better. Don't worry about the WPM if you are a beginner. It will get better when you practice.</p>
+              <br/>
+              <h2>What is Accuracy?</h2>
+              <p>It's the percentage of your correct key presses. Each time you press a wrong key, the accuracy will decrease. Try to keep the accuracy above 95% as much as you can.</p>
+            </div>
+          </div>
+          <!-- Each child div in #showcase represents a slide -->
+          <div class="showcase-slide">
+            <!-- Put the slide content in a div with the class .showcase-content. -->
+            <div class="showcase-content">
+              <div class="showcase-content-wrapper">
+                <h2>How do I start?</h2>
+                <p>First, you must learn to place your keys on the keyboard. All your fingers, except the thumbs, should be placed right above the home row. The home row is the row of keys starting with A, S, D and F.</p>
+                <p><img alt="keyboard home row" src="/images/help/homerow.png" /></p>
+              </div>
+            </div>
+          </div>
+          <!-- Each child div in #showcase represents a slide -->
+          <div class="showcase-slide">
+            <!-- Put the caption content in a div with the class .showcase-caption -->
+            <div class="showcase-content-wrapper">
+              <h2>Learning to type </h2>
+              <p>Now that you know how to place the fingers, it's time to start the lessons. Click on the 'Learn' button on the top bar. There is a label with a blue background with quick hints on what to do next. You will see the text to type in the center.</p>
+              <p><img alt="Typing learn button" src="/images/help/learnbtn.png" /></p>
+              <br/>
+              <p>In the bottom there will be a keyboard and the next key you should press will be highlighted. On either side of the keyboard, you will see two hands. The finger you must press the next key with will be highlighted.</p>
+            </div>
+          </div>
+          <!-- Each child div in #showcase represents a slide -->
+          <div class="showcase-slide">
+            <!-- Put the slide content in a div with the class .showcase-content. -->
+            <div class="showcase-content">
+              <div class="showcase-content-wrapper">
+                <h2>How are lessons organized?</h2>
+                <p>The lessons in the 'Learn' section are organized in a sequential order. If you are a beginner, we recommend that you start from the beginning and make your way through all the lessons.</p>
+                <p>However, you can also skip lessons and choose the lesson you like from the Lessons dropdown to the top-left.</p>
+                <p><img alt="Typing lesson list" src="/images/help/lessonlist.png" /></p>
+                <br/>
+
+              </div>
+            </div>
+          </div>
+          <!-- Each child div in #showcase represents a slide -->
+          <div class="showcase-slide">
+            <!-- Put the tooltips in a div with the class .showcase-tooltips. -->
+            <div class="showcase-content-wrapper">
+              <!-- Each anchor in .showcase-tooltips represents a tooltip. The coords attribute represents the position of the tooltip. -->
+              <h2>Practising for mastery</h2>
+              <p>The key to become a fast touch typist is practice. We has a large database of material for you to practice with. Click on the 'Practice' button on the top bar. Select what you want to practice using the dropdown.</p>
+              <p><img alt="Typing practice list" src="/images/help/practicelist.png" /></p>
+            </div>
+          </div>
+
+          <div class="showcase-slide">
+            <!-- Put the tooltips in a div with the class .showcase-tooltips. -->
+            <div class="showcase-content-wrapper">
+              <!-- Each anchor in .showcase-tooltips represents a tooltip. The coords attribute represents the position of the tooltip. -->
+              <h2>Code!</h2>
+              <p>If you are a programmer, you can practice typing in real-world code in your favorite programming language, while practicing touch typing.</p>
+              <p><img alt="Typing practice list" src="/images/help/codemode.png" /></p>
+              <p>Currently you can practice with C++, Java, PHP, Python and Ruby code. More languages and code snippets will be added soon!</p>
+            </div>
+          </div>
+          <!-- Each child div in #showcase represents a slide -->
+          <div class="showcase-slide">
+            <!-- Put the slide content in a div with the class .showcase-content. -->
+            <div class="showcase-content">
+              <div class="showcase-content-wrapper">
+                <h2>Tips</h2>
+                <ul>
+                  <li>When you learn, don't worry about your speed. Try to hit the right keys the first time.</li>
+                  <br/>
+                  <li>If your accuracy is less than 95% for a lesson, make sure you repeat that exercise until you get it right.</li>
+                  <br/>
+                  <li>Practice is the key. Practice with the numerous practice sessions every day.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- Each child div in #showcase represents a slide -->
+          <div class="showcase-slide">
+            <!-- Put the slide content in a div with the class .showcase-content. -->
+            <div class="showcase-content">
+              <div class="showcase-content-wrapper">
+                <h2>Happy Typing!</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <form method="post" id="contactForm" action="/">
+        <input type="hidden" name="category" id="category" value="1"/>
+      </form>
+      <div class="container" id="footer">
+        <a href="/about">About</a>
+        <a href="/" target="_blank">Blog</a>
+        <a href="/help">Help</a>
+        <a href="/contact">Contact Us</a>
+      </div>
+    </div> <!-- /.wrapper -->
+    <div id="modalOptions" class="modal hide fade" tabindex=-1 role="dialog" aria-labelledby="mdlOptionsHeader" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="mdlOptionsHeader">Options</h3>
+      </div>
+      <div class="modal-body">
+        <form id="option-form" method="post">
+          <div class="opt">
+            <label class="checkbox">
+              <input type="checkbox" id="optKBRow" value="1" />Show keyboard and hands
+            </label>
+          </div>
+          <div class="opt">
+            <label class="checkbox">
+              <strong><em>More options coming soon! </em></strong>
+            </label>
+          </div>
+        </form>
+      </div> <!-- /.modal-body -->
+      <div class="modal-footer" id="optionFooter">
+        <div class="modalOptionFooter">
+          <button class="btn btn-primary" id="option-submit">Okay</button>
+          <button class="btn" id="option-cancel">Cancel</button>
+        </div>
+      </div>
+    </div> <!-- /#modalOptions  -->
+
+
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>
