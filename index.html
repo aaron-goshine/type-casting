@@ -11,16 +11,16 @@
     <title>Learn and practice touch typing</title>
     <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
     <link rel="image_src" href="/images/logo.png" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/../bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/../bootstrap/css/bootstrap-responsive.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/typeSuccess.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/css/keyBoard.css" />
-    <script type="text/javascript" src="/js/../jquery/jquery.js"></script>
-    <script type="text/javascript" src="/js/../bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script>
-    <script type="text/javascript" src="/js/typeSuccess.js"></script>
-    <script type="text/javascript" src="/js/keyBoard.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/typeSuccess.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/keyBoard.css" />
+    <script type="text/javascript" src="jquery/jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/typeSuccess.js"></script>
+    <script type="text/javascript" src="js/keyBoard.js"></script>
 
     <meta name="description" content="Learn and practice touch typing. Easy and hassle-free."/>
     <meta name="keywords" content="typing, typing tutor, touch typing, typing lessons, typing practice"/>
@@ -32,8 +32,7 @@
         overflow: auto;
       }
     </style>
-
-    <script src='/google_analytics_auto.js'></script></head>
+  </head>
   <body>
     <div class="wrapper">
 
@@ -198,7 +197,7 @@
         var selectedCategoryId = '1';
         var currentString = '';
         var currentStringId = 0;
-        var lessonListAjax_url = '/general/getLessonListAjax';
+        var lessonListAjax_url = 'general/getLessonListAjax';
       </script>
 
       <div class="container" id="footer">
@@ -208,7 +207,8 @@
       </div>
 
     </div> <!-- /.wrapper -->
-    <div id="modalOptions" class="modal hide fade" tabindex=-1 role="dialog" aria-labelledby="mdlOptionsHeader" aria-hidden="true">
+    <div id="modalOptions" class="modal hide fade" tabindex=-1
+      role="dialog" aria-labelledby="mdlOptionsHeader" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
         <h3 id="mdlOptionsHeader">Options</h3>
